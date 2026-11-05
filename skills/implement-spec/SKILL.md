@@ -22,7 +22,7 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 
 ## Steps
 
-1. Read the spec and tickets, bodies and comments, to understand the task graph. Read `docs/features/` for what each feature does for its users, and the spec's testing decisions: the seams it names are pre-agreed for `tdd`. Then ask the user, in one round with your recommended answers, everything only they can give, post the answers on the spec, and wait for their go.
+1. Read the spec and tickets, bodies and comments, to understand the task graph. Read the feature map of the project's verify skill (`.claude/skills/verify-<app>/`) for what each feature does for its users, and the spec's testing decisions: the seams it names are pre-agreed for `tdd`. Then ask the user, in one round with your recommended answers, everything only they can give, post the answers on the spec, and wait for their go.
 
 2. (optional) Use an **exploration subagent** to conduct any exploration required by the tickets - relevant codebase files or external documentation. Ensure the exploration subagent can save files - it should save its markdown notes in a directory outside the repo, accessible by all future subagents. This lets **implementer subagents** focus on implementation rather than exploration.
 
@@ -31,7 +31,7 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 4. Use **implementer subagents** to implement each ticket, each in its own worktree on its own branch. Each implementer subagent:
    - confirms its worktree is based on the integration branch before starting, and resets onto it if not;
    - calls the Skill tool with `tdd` to build the ticket, at the seams step 1 found;
-   - updates the `docs/features/` file of every feature whose behaviour it adds or changes, and adds a file for a new one, with **Try it** steps it has seen pass;
+   - updates the verify skill's feature file of every feature whose behaviour it adds or changes, and adds a file for a new one, with Driving steps it has seen pass;
    - merges the integration branch tip into its own branch before reporting done
 
 5. Once an **implementer subagent** completes, merge its work to the integration branch with a **merger subagent**.

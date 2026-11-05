@@ -11,19 +11,19 @@ The run is **AFK**: decide what the user would and record why. Only a choice bet
 
 ## 1. Pin the PR
 
-`gh pr view <n> --json number,url,headRefName,headRefOid,body`. Bring the app up on the PR's head in a worktree, as the project's `docs/agents/run-the-app.md` says, on a laptop or in a cloud session.
+`gh pr view <n> --json number,url,headRefName,headRefOid,body`. Bring the app up on the PR's head in a worktree with the project's verify skill (`.claude/skills/verify-<app>/`): its Launch and Doctor, on a laptop or in a cloud session.
 
 Done when the running app serves something only the PR's head produces.
 
 ## 2. Steps
 
-`prove-it` takes the PR's `## Try it` section as the author's steps. When it is missing or thin, write it with the `pr` skill's Try it rules, from the diff, the closed tickets' **Try it** sections and the `docs/features/` files for the behaviour the diff touches. Put it in the PR body and list it under Calls made for you.
+`prove-it` takes the PR's `## Try it` section as the author's steps. When it is missing or thin, write it with the `pr` skill's Try it rules, from the diff, the closed tickets' **Try it** sections and the verify skill's feature files for the behaviour the diff touches. Put it in the PR body and list it under Calls made for you.
 
 Done when every behaviour the diff changes has a step.
 
 ## 3. Prove
 
-Start a fresh subagent that reads and follows `../prove-it/SKILL.md`. Brief it with pointers only: the PR URL, the head SHA, the app URL, `docs/agents/run-the-app.md`, and in later rounds the last proven SHA. The PR's Not tried list is where it attacks first. Tell it it may not edit, commit, push or post: its report is its final message.
+Start a fresh subagent that reads and follows `../prove-it/SKILL.md`. Brief it with pointers only: the PR URL, the head SHA, the app URL, the verify skill's path, and in later rounds the last proven SHA. The PR's Not tried list is where it attacks first. Tell it it may not edit, commit, push or post: its report is its final message.
 
 Done when its table covers every step and every behaviour the diff changes. Start one more fresh subagent if it does not.
 
@@ -38,7 +38,7 @@ A failure whose fix is a product choice stays unfixed: name the choice.
 Commit, then push to the PR branch. Reply with each failure and its fix commit, or the choice it waits on.
 ```
 
-Then return to step 3 with a fresh subagent, briefed with the last proven SHA, to confirm each fix and prove what changed since. Stop when a round has no FAIL a fix can close. A step that failed because its `docs/features/` file is wrong, not the app, gets that file fixed on the PR branch.
+Then return to step 3 with a fresh subagent, briefed with the last proven SHA, to confirm each fix and prove what changed since. Stop when a round has no FAIL a fix can close. A step that failed because a feature file is wrong, not the app, gets that file fixed on the PR branch.
 
 ## 5. Post
 
@@ -48,4 +48,4 @@ The API cannot attach images to a comment, so screenshots go on the repository's
 
 ## 6. Clean up
 
-Stop what you started, remove the worktree and the data the run created. Done when `git worktree list` and the processes you started match how you found them.
+Run the verify skill's Cleanup, remove the worktree and the data the run created. Done when `git worktree list` and the processes you started match how you found them.

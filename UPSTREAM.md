@@ -13,17 +13,25 @@ Left out: `ask-matt` (Matt's own), `setup-matt-pocock-skills` (replaced by `setu
 | Skill | Change |
 |---|---|
 | all | `/setup-matt-pocock-skills` pointers name `/aysnc:setup`. |
-| `implement-spec` | AFK after one question round; the spec's named seams are pre-agreed for `tdd`; implementers keep `docs/features/` current; the PR's Try it comes from the tickets' Try it; a `walkthrough` runs once checks are green. The user merges. |
+| `implement-spec` | AFK after one question round; the spec's named seams are pre-agreed for `tdd`; implementers keep the verify skill's feature map current; the PR's Try it comes from the tickets' Try it; a `walkthrough` runs once checks are green. The user merges. |
 | `pr` | After Merge Danger: Try it (a Start line, then steps `prove-it` runs), Not tried (where a verifier looks first), Calls made for you, and a Closes line. |
 | `tdd` | A seam the spec, ticket or `AGENTS.md` names is pre-agreed; in an AFK run the agent picks and records one. |
 | `to-tickets` | A Try it section per ticket. |
 
 ## Ours
 
-- `setup`: writes the docs the other skills read, the feature docs (`docs/features/`, users' side only, after Lauren Tan's pstack verification maps) and their check, project Claude settings, and the cloud scripts.
+- `setup`: writes the docs the other skills read, runs `create-verification-skill`, guards its feature map with `check-feature-map`, and writes project Claude settings and the cloud scripts.
 - `walkthrough`: runs `prove-it` on a PR in a fresh subagent, sends each FAIL to an implementer, and keeps one Walkthrough comment.
 
 From [junaidbhura/skills](https://github.com/junaidbhura/skills): `prove-it`, `pocock-this` and `in-your-own-words`.
+
+## pstack
+
+`create-verification-skill` (with its `references/feature-map-example/`) and `maintain-verification-skill` are copied from Lauren Tan's [pstack](https://github.com/cursor/plugins/tree/main/pstack) at commit `2776ddd2355d6d6c8747d3964600f28daf62f049`, MIT licensed ([LICENSE-pstack](LICENSE-pstack)). The commit that added them is a verbatim copy.
+
+| Skill | Change |
+|---|---|
+| both | `.cursor/skills/` reads `.claude/skills/`; `/create-verification-skill` and `/maintain-verification-skill` read `/aysnc:…`. |
 
 ## Taking an upstream release
 

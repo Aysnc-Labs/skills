@@ -1,17 +1,28 @@
-// Checks docs/features/ against its contract. Run: node scripts/check-features.ts
+// Checks every verification skill's feature map (.claude/skills/verify-*/features/) against the
+// feature entry contract create-verification-skill writes. Run: node scripts/check-feature-map.ts
 //
 // - README.md lists every feature file under "## Features", and every listed file exists.
-// - Each feature file has an H1, a paragraph, then exactly: Parts, Reach it, Try it, Traps.
-// - Parts and Reach it have a bullet; Try it has a "Start:" line and a numbered step.
-// - No feature file names a path git tracks: features say what a user touches, not where code lives.
+// - Each feature file has an H1, a paragraph, then exactly these H2s in order: Sub-features,
+//   How to get to it (user POV), Driving it with <harness>, Gotchas.
+// - Sub-features and How to get to it have a bullet; Driving it starts with "Preconditions:".
+// - No feature file names a path git tracks: the map names user paths, not implementation.
 // - Every relative link resolves.
 import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, posix, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-export const DIR = 'docs/features';
-const SECTIONS = ['Parts', 'Reach it', 'Try it', 'Traps'] as const;
+const SKILLS = '.claude/skills';
+const SECTIONS = ['Sub-features', 'How to get to it (user POV)', 'Driving it with', 'Gotchas'] as const;
+
+/** The feature map folders: `.claude/skills/verify-<app>/features/`. */
+export function maps(root: string): string[] {
+  const skills = join(root, SKILLS);
+  if (!existsSync(skills)) return [];
+  return readdirSync(skills)
+    .filter((d) => d.startsWith('verify-') && existsSync(join(skills, d, 'features')))
+    .map((d) => `${SKILLS}/${d}/features`);
+}
 
 export interface Result {
   readonly errors: readonly string[];
@@ -42,15 +53,23 @@ function links(file: string, lines: ReturnType<typeof prose>, exists: (p: string
 }
 
 export function check(root: string, tracked: readonly string[]): Result {
+  const found = maps(root);
+  if (found.length === 0) return { errors: [`no ${SKILLS}/verify-*/features/ folder: run /aysnc:create-verification-skill`], summary: '' };
+  const results = found.map((dir) => checkMap(root, dir, tracked));
+  const count = results.reduce((n, r) => n + r.count, 0);
+  return { errors: results.flatMap((r) => r.errors), summary: `feature map: ${count} features in ${found.length} map(s), all listed and in shape` };
+}
+
+function checkMap(root: string, mapDir: string, tracked: readonly string[]): { errors: string[]; count: number } {
   const errors: string[] = [];
-  const dir = join(root, DIR);
-  if (!existsSync(join(dir, 'README.md'))) return { errors: [`${DIR}/README.md is missing`], summary: '' };
+  const dir = join(root, mapDir);
+  if (!existsSync(join(dir, 'README.md'))) return { errors: [`${mapDir}/README.md is missing`], count: 0 };
 
   const files = new Set(tracked);
   const folders = new Set(tracked.flatMap((f) => f.split('/').slice(0, -1).map((_, i, a) => a.slice(0, i + 1).join('/'))));
   const exists = (p: string) => files.has(p) || folders.has(p) || existsSync(join(root, p));
 
-  const readme = `${DIR}/README.md`;
+  const readme = `${mapDir}/README.md`;
   const readmeLines = prose(readFileSync(join(root, readme), 'utf8'));
   links(readme, readmeLines, exists, errors);
 
@@ -61,7 +80,7 @@ export function check(root: string, tracked: readonly string[]): Result {
     for (const { text } of readmeLines.slice(start + 1)) {
       if (text.startsWith('## ')) break;
       const m = /^- \[[^\]]+\]\(([^)#]+\.md)\)/.exec(text);
-      if (m?.[1]) listed.add(m[1]);
+      if (m?.[1]) listed.add(m[1].replace(/^\.\//, ""));
     }
   }
 
@@ -69,7 +88,7 @@ export function check(root: string, tracked: readonly string[]): Result {
   for (const f of features) if (!listed.has(f)) errors.push(`${readme}: ${f} is missing from "## Features"`);
 
   for (const name of features) {
-    const file = `${DIR}/${name}`;
+    const file = `${mapDir}/${name}`;
     const lines = prose(readFileSync(join(root, file), 'utf8'));
     links(file, lines, exists, errors);
 
@@ -78,22 +97,23 @@ export function check(root: string, tracked: readonly string[]): Result {
     if (!content[1] || content[1].text.startsWith('#')) errors.push(`${file}: needs a paragraph after the title`);
 
     const headings = lines.filter((l) => l.text.startsWith('## ')).map((l) => l.text.slice(3).trim());
-    if (headings.join('|') !== SECTIONS.join('|')) {
+    const inOrder = headings.length === SECTIONS.length && SECTIONS.every((s, i) => (s === 'Driving it with' ? headings[i]?.startsWith(`${s} `) : headings[i] === s));
+    if (!inOrder) {
       errors.push(`${file}: sections must be exactly ${SECTIONS.map((s) => `"${s}"`).join(', ')} in that order (found ${headings.map((h) => `"${h}"`).join(', ') || 'none'})`);
     }
 
     const section = (title: string) => {
-      const i = lines.findIndex((l) => l.text === `## ${title}`);
+      const i = lines.findIndex((l) => l.text === `## ${title}` || (title.endsWith(' with') && l.text.startsWith(`## ${title} `)));
       if (i === -1) return [];
       const rest = lines.slice(i + 1);
       const end = rest.findIndex((l) => l.text.startsWith('## '));
       return (end === -1 ? rest : rest.slice(0, end)).map((l) => l.text);
     };
-    if (!section('Parts').some((t) => /^- \S/.test(t))) errors.push(`${file}: "Parts" needs at least one bullet`);
-    if (!section('Reach it').some((t) => /^- \S/.test(t))) errors.push(`${file}: "Reach it" needs at least one bullet`);
-    const tryIt = section('Try it');
-    if (!tryIt.some((t) => t.trim() === 'Start:')) errors.push(`${file}: "Try it" needs a "Start:" line`);
-    if (!tryIt.some((t) => /^\d+\.\s+\S/.test(t))) errors.push(`${file}: "Try it" needs at least one numbered step`);
+    if (!section('Sub-features').some((t) => /^- \S/.test(t))) errors.push(`${file}: "Sub-features" needs at least one bullet`);
+    if (!section('How to get to it (user POV)').some((t) => /^- \S/.test(t))) errors.push(`${file}: "How to get to it (user POV)" needs at least one bullet`);
+    const driving = section('Driving it with').filter((t) => t.trim() !== '');
+    if (driving[0]?.trim() !== 'Preconditions:') errors.push(`${file}: "Driving it with ..." must start with "Preconditions:"`);
+    if (!driving.some((t) => /^- \*\*[^*]+\*\*/.test(t))) errors.push(`${file}: "Driving it with ..." needs a labeled step (- **Step.** action, command, result)`);
 
     for (const { line, text } of lines) {
       for (const m of text.matchAll(/`([^`\s]+)`/g)) {
@@ -105,7 +125,7 @@ export function check(root: string, tracked: readonly string[]): Result {
     }
   }
 
-  return { errors, summary: `features: ${features.length} files, all listed and in shape` };
+  return { errors, count: features.length };
 }
 
 function main(): void {
@@ -114,7 +134,7 @@ function main(): void {
   const { errors, summary } = check(root, tracked);
   for (const error of errors) console.error(error);
   if (errors.length > 0) {
-    console.error(`\n${errors.length} problem(s). Fix ${DIR}/, not this script.`);
+    console.error(`\n${errors.length} problem(s). Fix the feature map, not this script.`);
     process.exit(1);
   }
   console.log(summary);

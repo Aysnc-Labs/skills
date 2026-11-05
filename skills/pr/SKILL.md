@@ -33,7 +33,7 @@ Use this template for writing the PR body:
 
 ## Try it
 
-**Start:** <run-the-app.md, plus the branch-specific setup: data, accounts, flags>
+**Start:** <the verify skill's Launch, plus the branch-specific setup: data, accounts, flags>
 
 1. <start state> → <action> → <what you see>
 
@@ -189,9 +189,9 @@ The blast radius is the potential impact or scope of the changes introduced by t
 
 The script a person follows to see the change work, and what `prove-it` treats as the author's own exam. Write it for someone who has never seen the diff and starts from a fresh clone.
 
-- **Start** names everything before step 1: the project's `docs/agents/run-the-app.md`, then only what this branch adds to it (a seed, an account, a flag, an env var name).
+- **Start** names everything before step 1: the project's verify skill (`.claude/skills/verify-<app>/`) Launch and Doctor, then only what this branch adds to them (a seed, an account, a flag, an env var name).
 - One numbered step per behaviour the PR changes: a start state, one action, and what they should see. "Open `/` in the playground → read the heading → it says `Oz playground`", not "check the homepage works".
-- Reuse the **Try it** steps of the `docs/features/` files and closed tickets the diff touches.
+- Reuse the **Try it** steps of the closed tickets and the Driving steps of the verify skill's feature files the diff touches.
 - Cover what users see first, then what only the diff's edges reach: the empty state, the error, the second click.
 - A change no person can observe (a type, a guard, a build rule) gets one step that runs the command which shows it, and its expected output.
 

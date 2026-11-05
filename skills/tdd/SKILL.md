@@ -23,6 +23,8 @@ A **seam** is the public boundary you test at: the interface where you observe b
 
 Ask: "What's the public interface, and which seams should we test?" Give each proposed seam a one-line note on what it catches and what it misses.
 
+A seam the spec or ticket already names (a "Testing Decisions" section, a seam the project's `AGENTS.md` defines) is pre-agreed: write it down and start. Ask only about a seam nothing names. In an AFK run nobody answers, so pick the highest existing seam that shows the behaviour and record the choice in your Report.
+
 When the shape of that interface is itself in question (how deep the module is, where the seam belongs, what the interface should expose), call the Skill tool with "codebase-design" for the vocabulary. It is the shared source of the module, interface, depth, seam, adapter, leverage and locality terms, and it is a reference to consult, not a session to run.
 
 ## Anti-patterns

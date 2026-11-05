@@ -30,6 +30,16 @@ Use this template for writing the PR body:
 **Blast Radius:** <one-word description>
 
 <optional: potential ramifications of merge>
+
+## Manual testing
+
+1. <where you start> → <what you do> → <what you see>
+
+## Decisions
+
+- <a call made without the user, and why> (only when there were any)
+
+Closes #<n>, closes #<n>
 ```
 
 ## Sections
@@ -168,3 +178,18 @@ Execution-based evidence is A-tier. Test results, console output. Show the exact
 Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
 
 The blast radius is the potential impact or scope of the changes introduced by this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
+
+### Manual testing
+
+The script a person, or the `prove-it` skill, follows to see the change work. Write it for someone who has never seen the diff.
+
+- One numbered step per behaviour the PR changes: a start state, one action, and what they should see. "Open `/` in the playground → read the heading → it says `Oz playground`", not "check the homepage works".
+- Start from the project's `docs/agents/run-the-app.md` (how to bring the app up) and reuse the **Try it** steps of every `docs/feature-map.md` entry and closed ticket the diff touches.
+- Cover what users see first, then what only the diff's edges reach: the empty state, the error, the second click.
+- A change no person can observe (a type, a guard, a build rule) gets one step that runs the command which shows it, and its expected output.
+
+Done when every behaviour in Summary has a step whose expected result could fail.
+
+### Decisions
+
+Calls an agent made where the user would normally decide, each with its reason, so the user reviews them in one place. Omit the section when there are none.

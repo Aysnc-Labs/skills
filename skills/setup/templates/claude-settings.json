@@ -1,0 +1,37 @@
+{
+  "autoMemoryEnabled": false,
+  "extraKnownMarketplaces": {
+    "aysnc": {
+      "source": { "source": "github", "repo": "Aysnc-Labs/skills" }
+    }
+  },
+  "enabledPlugins": {
+    "aysnc@aysnc": true
+  },
+  "permissions": {
+    "deny": [
+      "Read(./.env*)",
+      "Read(!./.env.example)",
+      "Bash(git push --force*)",
+      "Bash(git push * --force*)",
+      "Bash(git push -f*)",
+      "Bash(git push * -f*)",
+      "Bash(git push * main)",
+      "Bash(git push * *:main*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR\"/.sandbox/claude-cloud/session-start.sh",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}

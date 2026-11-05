@@ -27,7 +27,7 @@ Its Launch section also covers a Claude Code cloud session (`CLAUDE_CODE_REMOTE=
 Then guard the feature map:
 
 1. Copy [check-feature-map.ts](templates/scripts/check-feature-map.ts) and [its test](templates/scripts/check-feature-map.test.ts) into the project's scripts folder. They need Node 22.18 or later (type stripping); check the pinned version. The check holds every `verify-*` skill's map to the feature entry contract, and fails on a feature file that names a repo path: the map names what users touch, and an agent finds code by searching.
-2. Wire both into the project's one check command, its pre-push hook and CI, the way its other guards are wired.
+2. Wire both into the project's one check command, its pre-push hook and CI, the way its other guards are wired. Register the verify skill's helper scripts as entry points with the project's dead-code checker (knip and the like), or it reports them as unused.
 
 Done when the generated skill was proven end to end as `create-verification-skill` requires, and the check prints its summary line and its test passes through the project's check command.
 

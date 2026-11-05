@@ -99,3 +99,8 @@ test('Driving it without Preconditions fails', () => {
   const { errors } = check(repo((f) => { f['create-note.md'] = (f['create-note.md'] ?? '').replace('Preconditions:\n', ''); }), tracked);
   assert.ok(errors.some((e) => e.endsWith('must start with "Preconditions:"')));
 });
+
+test('a link inside inline code, or to a site route, is not checked as a file', () => {
+  const { errors } = check(repo((f) => { f['create-note.md'] += '- It lists `[Notes](/notes)` and links [the API](/api).\n'; }), tracked);
+  assert.deepEqual(errors, []);
+});

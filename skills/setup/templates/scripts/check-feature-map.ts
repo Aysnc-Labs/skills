@@ -6,7 +6,7 @@
 //   How to get to it (user POV), Driving it with <harness>, Gotchas.
 // - Sub-features and How to get to it have a bullet; Driving it starts with "Preconditions:".
 // - No feature file names a path git tracks: the map names user paths, not implementation.
-// - Every relative link resolves.
+// - Every relative link outside inline code resolves; a link starting with / is a site route.
 import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, posix, resolve } from 'node:path';
@@ -43,9 +43,9 @@ function prose(text: string): Array<{ line: number; text: string }> {
 
 function links(file: string, lines: ReturnType<typeof prose>, exists: (p: string) => boolean, errors: string[]) {
   for (const { line, text } of lines) {
-    for (const m of text.matchAll(/\]\(([^)\s#]+)(?:#[^)]*)?\)/g)) {
+    for (const m of text.replace(/`[^`]*`/g, '').matchAll(/\]\(([^)\s#]+)(?:#[^)]*)?\)/g)) {
       const target = m[1] ?? '';
-      if (/^[a-z]+:/i.test(target)) continue;
+      if (/^[a-z]+:/i.test(target) || target.startsWith('/')) continue;
       const path = posix.normalize(posix.join(posix.dirname(file), target)).replace(/\/$/, '');
       if (!exists(path)) errors.push(`${file}:${line}: link ${target} does not resolve`);
     }

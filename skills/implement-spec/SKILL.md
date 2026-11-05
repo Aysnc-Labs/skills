@@ -40,7 +40,7 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 
 7. Once all tickets are complete, call the Skill tool with `code-review` on the integration branch. Fix all issues raised by the code review in a single **implementer subagent**.
 
-8. If a draft PR exists, write its body with the `pr` skill, its Try it built from the tickets' **Try it** steps, and mark it ready for review. Otherwise, resolve each ticket the way the issue tracker closes work, and report the integration branch.
+8. If a draft PR exists, write its body with the `pr` skill, its Try it built from the tickets' **Try it** steps and its Not tried from what each implementer reported it could not check, and mark it ready for review. Otherwise, resolve each ticket the way the issue tracker closes work, and report the integration branch.
 
    With a PR, then run the `walkthrough` skill on it in a fresh subagent: an agent that wrote none of the code. Read `../walkthrough/SKILL.md` and brief it with the PR URL. Start it once the PR's checks are green; a red check goes to a fresh implementer subagent with the failing step's log. Done when the PR carries a `Walkthrough` comment. The user merges.
 

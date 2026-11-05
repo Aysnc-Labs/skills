@@ -14,7 +14,7 @@ Left out: `ask-matt` (Matt's own), `setup-matt-pocock-skills` (replaced by `setu
 |---|---|
 | all | `/setup-matt-pocock-skills` pointers name `/aysnc:setup`. |
 | `implement-spec` | AFK after one question round; the spec's named seams are pre-agreed for `tdd`; implementers keep `docs/feature-map.md` current; the PR's Try it comes from the tickets' Try it; a `walkthrough` runs once checks are green. The user merges. |
-| `pr` | Our template: a one-line lead, What changes, Try it, Proof as a before/after table, Risk (Undo, Reaches), Calls made for you, Closes. |
+| `pr` | After Merge Danger: Try it (a Start line, then steps `prove-it` runs), Not tried (where a verifier looks first), Calls made for you, and a Closes line. |
 | `tdd` | A seam the spec, ticket or `AGENTS.md` names is pre-agreed; in an AFK run the agent picks and records one. |
 | `to-tickets` | A Try it section per ticket. |
 

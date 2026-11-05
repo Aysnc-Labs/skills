@@ -23,7 +23,7 @@ Done when every behaviour the diff changes has a step.
 
 ## 3. Prove
 
-Start a fresh subagent that reads and follows `../prove-it/SKILL.md`. Brief it with pointers only: the PR URL, the head SHA, the app URL, `docs/agents/run-the-app.md`, and in later rounds the last proven SHA. Tell it it may not edit, commit, push or post: its report is its final message.
+Start a fresh subagent that reads and follows `../prove-it/SKILL.md`. Brief it with pointers only: the PR URL, the head SHA, the app URL, `docs/agents/run-the-app.md`, and in later rounds the last proven SHA. The PR's Not tried list is where it attacks first. Tell it it may not edit, commit, push or post: its report is its final message.
 
 Done when its table covers every step and every behaviour the diff changes. Start one more fresh subagent if it does not.
 

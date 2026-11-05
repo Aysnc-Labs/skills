@@ -12,7 +12,7 @@ The goal is the entire spec implemented on a single **integration branch**, with
 
 The tickets are not a list of steps. They are a **task graph** with blocking relationships between them. This means there is always a **frontier** of tickets which are ready to be grabbed.
 
-The run is **AFK** once the user says go: nobody answers questions. Agents make the calls the user would, and record each with its reason in the PR's Decisions section. Only an irreversible action, a product choice between behaviours, or work outside the repository waits for the user: park it in Decisions and keep the rest of the frontier moving.
+The run is **AFK** once the user says go: nobody answers questions. Agents make the calls the user would, and record each with its reason in the PR's Calls made for you. Only an irreversible action, a product choice between behaviours, or work outside the repository waits for the user: park it there and keep the rest of the frontier moving.
 
 Start every subagent with a fresh context window.
 
@@ -40,7 +40,7 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 
 7. Once all tickets are complete, call the Skill tool with `code-review` on the integration branch. Fix all issues raised by the code review in a single **implementer subagent**.
 
-8. If a draft PR exists, write its body with the `pr` skill, its Manual testing built from the tickets' **Try it** steps, and mark it ready for review. Otherwise, resolve each ticket the way the issue tracker closes work, and report the integration branch.
+8. If a draft PR exists, write its body with the `pr` skill, its Try it built from the tickets' **Try it** steps, and mark it ready for review. Otherwise, resolve each ticket the way the issue tracker closes work, and report the integration branch.
 
    With a PR, then run the `walkthrough` skill on it in a fresh subagent: an agent that wrote none of the code. Read `../walkthrough/SKILL.md` and brief it with the PR URL. Start it once the PR's checks are green; a red check goes to a fresh implementer subagent with the failing step's log. Done when the PR carries a `Walkthrough` comment. The user merges.
 

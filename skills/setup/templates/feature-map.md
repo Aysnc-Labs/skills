@@ -9,7 +9,7 @@ One `### ` entry per feature: something a user, editor or developer can name and
 - What: one line, in GLOSSARY.md's words.
 - Paths: entry points in backticks (a package, a route folder), not every file. Every folder the Coverage line matches must appear under some feature.
 - Seams: where its tests live, by the project's seam names.
-- Try it: numbered steps a person follows to see it work: start state → action → what they see. PRs copy these into Manual testing; `prove-it` runs them.
+- Try it: numbered steps a person follows to see it work: start state → action → what they see. PRs copy these into their Try it section; `prove-it` runs them.
 Location and use only: rules belong in CODING_STANDARDS.md or code, decisions in docs/adr/, status in the tracker.
 -->
 

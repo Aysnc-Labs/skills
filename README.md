@@ -6,7 +6,7 @@ Aysnc Labs' engineering workflow for Claude Code, built on [Matt Pocock's skills
 grill-with-docs → to-spec → to-tickets → implement-spec (AFK) → walkthrough → you merge
 ```
 
-Every PR carries **Manual testing** steps, and `walkthrough` has an agent that wrote none of the code run `prove-it` on them in a real browser before you look. Each project keeps a checked **feature map** (`docs/feature-map.md`) that says where every feature lives and how to try it.
+Every PR carries **Try it** steps, and `walkthrough` has an agent that wrote none of the code run `prove-it` on them in a real browser before you look. Each project keeps a checked **feature map** (`docs/feature-map.md`) that says where every feature lives and how to try it.
 
 ## Install
 

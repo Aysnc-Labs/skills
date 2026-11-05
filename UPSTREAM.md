@@ -13,8 +13,8 @@ Left out: `ask-matt` (Matt's own), `setup-matt-pocock-skills` (replaced by `setu
 | Skill | Change |
 |---|---|
 | all | `/setup-matt-pocock-skills` pointers name `/aysnc:setup`. |
-| `implement-spec` | AFK after one question round; the spec's named seams are pre-agreed for `tdd`; implementers keep `docs/feature-map.md` current; the PR's Manual testing comes from the tickets' Try it; a `walkthrough` runs once checks are green. The user merges. |
-| `pr` | Manual testing and Decisions sections; Closes line. |
+| `implement-spec` | AFK after one question round; the spec's named seams are pre-agreed for `tdd`; implementers keep `docs/feature-map.md` current; the PR's Try it comes from the tickets' Try it; a `walkthrough` runs once checks are green. The user merges. |
+| `pr` | Our template: a one-line lead, What changes, Try it, Proof as a before/after table, Risk (Undo, Reaches), Calls made for you, Closes. |
 | `tdd` | A seam the spec, ticket or `AGENTS.md` names is pre-agreed; in an AFK run the agent picks and records one. |
 | `to-tickets` | A Try it section per ticket. |
 
@@ -23,7 +23,7 @@ Left out: `ask-matt` (Matt's own), `setup-matt-pocock-skills` (replaced by `setu
 - `setup`: writes the docs the other skills read, the feature map and its check, project Claude settings, and the cloud scripts.
 - `walkthrough`: runs `prove-it` on a PR in a fresh subagent, sends each FAIL to an implementer, and keeps one Walkthrough comment.
 
-From [junaidbhura/skills](https://github.com/junaidbhura/skills): `prove-it`, `pocock-this`, and `in-your-own-words` (adapted from Lauren Tan's [pstack](https://github.com/cursor/plugins/tree/main/pstack), MIT, [LICENSE-pstack](LICENSE-pstack)).
+From [junaidbhura/skills](https://github.com/junaidbhura/skills): `prove-it`, `pocock-this` and `in-your-own-words`.
 
 ## Taking an upstream release
 

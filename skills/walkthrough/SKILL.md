@@ -17,7 +17,7 @@ Done when the running app serves something only the PR's head produces.
 
 ## 2. Steps
 
-`prove-it` takes the PR's `## Manual testing` section as the author's steps. When it is missing or thin, write it with the `pr` skill's Manual testing rules, from the diff, the closed tickets' **Try it** sections and the `docs/feature-map.md` entries the diff touches. Put it in the PR body and list it under Decisions.
+`prove-it` takes the PR's `## Try it` section as the author's steps. When it is missing or thin, write it with the `pr` skill's Try it rules, from the diff, the closed tickets' **Try it** sections and the `docs/feature-map.md` entries the diff touches. Put it in the PR body and list it under Calls made for you.
 
 Done when every behaviour the diff changes has a step.
 

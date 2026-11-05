@@ -9,35 +9,33 @@ metadata:
     url: "https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md"
 ---
 
-Use this template for writing the PR body:
+Use this template for writing the PR body. Order matters: a reviewer reads what changes and tries it before reading any proof.
 
 ```markdown
-## Summary
+<one or two sentences: who notices this change, and what they notice>
+
+## What changes
 
 <diagram, diff-sketch, or tree>
 
-## Evidence
+## Try it
 
-- **Before:** <screenshot/output/failing test run>
-  **After:** <screenshot/output/passing test run>
+1. <start state> → <action> → <what you see>
 
-## Merge Danger
+## Proof
 
-**Door:** <one-way or two-way>
+| Check | Before | After |
+|---|---|---|
+| <behaviour> | <screenshot / failing run> | <screenshot / passing run> |
 
-<optional: description>
+## Risk
 
-**Blast Radius:** <one-word description>
+**Undo:** <easy: revert the PR | hard: what a revert leaves behind>
+**Reaches:** <who or what this can break, beyond the diff>
 
-<optional: potential ramifications of merge>
+## Calls made for you
 
-## Manual testing
-
-1. <where you start> → <what you do> → <what you see>
-
-## Decisions
-
-- <a call made without the user, and why> (only when there were any)
+- <a call an agent made where you would normally decide, and why>
 
 Closes #<n>, closes #<n>
 ```
@@ -46,7 +44,7 @@ Closes #<n>, closes #<n>
 
 Skip all preambles and keep prose brief. Use the user's domain language from `GLOSSARY.md`.
 
-### Summary
+### What changes
 
 Pick the smallest view that makes the key point clear.
 
@@ -165,21 +163,21 @@ Place each visual next to the short text it supports. Keep only the calls, files
 
 You may use one of these, you may use several, it is unlikely you will use all of them. Use your judgement and don't overwhelm the user.
 
-### Evidence
+### Proof
 
-Concrete evidence that the change works. Show a before and after.
+Concrete evidence that the change works: one row per behaviour, before and after.
 
 Screenshots are S-tier - when the environment is set up for it and the change is visual.
 
 Execution-based evidence is A-tier. Test results, console output. Show the exact test that now fails and passes, using pseudocode.
 
-### Merge Danger
+### Risk
 
-Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
+**Undo** says what reverting costs. Most PRs are undone by reverting them; say "easy". A data migration, a published version, a sent message or a deleted record survive a revert; say what stays behind.
 
-The blast radius is the potential impact or scope of the changes introduced by this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
+**Reaches** names what can break outside the diff: consumers of a changed export, pages sharing a changed component, layout at other widths, a changed default. Name the worst one first.
 
-### Manual testing
+### Try it
 
 The script a person, or the `prove-it` skill, follows to see the change work. Write it for someone who has never seen the diff.
 
@@ -188,8 +186,8 @@ The script a person, or the `prove-it` skill, follows to see the change work. Wr
 - Cover what users see first, then what only the diff's edges reach: the empty state, the error, the second click.
 - A change no person can observe (a type, a guard, a build rule) gets one step that runs the command which shows it, and its expected output.
 
-Done when every behaviour in Summary has a step whose expected result could fail.
+Done when every behaviour in What changes has a step whose expected result could fail.
 
-### Decisions
+### Calls made for you
 
 Calls an agent made where the user would normally decide, each with its reason, so the user reviews them in one place. Omit the section when there are none.

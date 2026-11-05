@@ -191,7 +191,7 @@ The script a person follows to see the change work, and what `prove-it` treats a
 
 - **Start** names everything before step 1: the project's `docs/agents/run-the-app.md`, then only what this branch adds to it (a seed, an account, a flag, an env var name).
 - One numbered step per behaviour the PR changes: a start state, one action, and what they should see. "Open `/` in the playground → read the heading → it says `Oz playground`", not "check the homepage works".
-- Reuse the **Try it** steps of the `docs/feature-map.md` entries and closed tickets the diff touches.
+- Reuse the **Try it** steps of the `docs/features/` files and closed tickets the diff touches.
 - Cover what users see first, then what only the diff's edges reach: the empty state, the error, the second click.
 - A change no person can observe (a type, a guard, a build rule) gets one step that runs the command which shows it, and its expected output.
 

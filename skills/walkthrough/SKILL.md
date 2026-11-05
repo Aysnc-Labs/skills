@@ -17,7 +17,7 @@ Done when the running app serves something only the PR's head produces.
 
 ## 2. Steps
 
-`prove-it` takes the PR's `## Try it` section as the author's steps. When it is missing or thin, write it with the `pr` skill's Try it rules, from the diff, the closed tickets' **Try it** sections and the `docs/feature-map.md` entries the diff touches. Put it in the PR body and list it under Calls made for you.
+`prove-it` takes the PR's `## Try it` section as the author's steps. When it is missing or thin, write it with the `pr` skill's Try it rules, from the diff, the closed tickets' **Try it** sections and the `docs/features/` files for the behaviour the diff touches. Put it in the PR body and list it under Calls made for you.
 
 Done when every behaviour the diff changes has a step.
 
@@ -38,7 +38,7 @@ A failure whose fix is a product choice stays unfixed: name the choice.
 Commit, then push to the PR branch. Reply with each failure and its fix commit, or the choice it waits on.
 ```
 
-Then return to step 3 with a fresh subagent, briefed with the last proven SHA, to confirm each fix and prove what changed since. Stop when a round has no FAIL a fix can close.
+Then return to step 3 with a fresh subagent, briefed with the last proven SHA, to confirm each fix and prove what changed since. Stop when a round has no FAIL a fix can close. A step that failed because its `docs/features/` file is wrong, not the app, gets that file fixed on the PR branch.
 
 ## 5. Post
 

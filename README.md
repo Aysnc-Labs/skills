@@ -6,7 +6,7 @@ Aysnc Labs' engineering workflow for Claude Code, built on [Matt Pocock's skills
 grill-with-docs → to-spec → to-tickets → implement-spec (AFK) → walkthrough → you merge
 ```
 
-Every PR carries **Try it** steps, and `walkthrough` has an agent that wrote none of the code run `prove-it` on them in a real browser before you look. Each project keeps a checked **feature map** (`docs/feature-map.md`) that says where every feature lives and how to try it.
+Every PR carries **Try it** steps, and `walkthrough` has an agent that wrote none of the code run `prove-it` on them in a real browser before you look. Each project keeps checked **feature docs** (`docs/features/`): what every feature does for its users and how to try it, with no code paths.
 
 ## Install
 
@@ -27,8 +27,8 @@ In a Claude Code cloud session plugins are not installed; the project's `.sandbo
 /aysnc:setup
 ```
 
-It writes `docs/agents/` (issue tracker, triage labels, domain docs, how to run the app), `CODING_STANDARDS.md`, the feature map and its check, `.claude/settings.json`, and the cloud scripts.
+It writes `docs/agents/` (issue tracker, triage labels, domain docs, how to run the app), `CODING_STANDARDS.md`, the feature docs and their check, `.claude/settings.json`, and the cloud scripts.
 
 ## Contributing
 
-Read [AGENTS.md](AGENTS.md). Bump `version` in `.claude-plugin/marketplace.json` with every change, and run `node --test skills/setup/templates/scripts/check-feature-map.test.ts`.
+Read [AGENTS.md](AGENTS.md). Bump `version` in `.claude-plugin/marketplace.json` with every change, and run `node --test skills/setup/templates/scripts/check-features.test.ts`.

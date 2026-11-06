@@ -45,6 +45,7 @@ You have access to several files in the repo:
 
 - `CLAUDE.md`/`AGENTS.md`: these files are pushed to the context window of any agent working in this repo. They should be used incredibly sparingly, usually only for **navigation pointers** to other files.
 - `CODING_STANDARDS.md`: this file is read during review, not implementation. Add **navigation pointers** to docs folders if the standards file gets more than 1,000 lines long.
+- `docs/code-map.md`: where each feature's code lives; the home for navigation lessons.
 - The verify skill's feature map (`.claude/skills/verify-<app>/features/`): what each feature does for its users and how to drive it; the home for lessons about driving the app.
 - `GLOSSARY.md` and `docs/adr/`: the domain terms and the decisions, kept by the `domain-modeling` skill.
 - Docs: use docs as references files, pointed to by other files. Look for existing docs before writing new ones.

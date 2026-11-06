@@ -27,8 +27,8 @@ In a Claude Code cloud session plugins are not installed; the project's `.sandbo
 /aysnc:setup
 ```
 
-It writes `docs/agents/` (issue tracker, triage labels, domain docs), the verify skill and its feature-map check, `CODING_STANDARDS.md`, `.claude/settings.json`, and the cloud scripts.
+It writes `docs/agents/` (issue tracker, triage labels, domain docs), the code map and its check, the verify skill and its feature-map check, `CODING_STANDARDS.md`, `.claude/settings.json`, and the cloud scripts.
 
 ## Contributing
 
-Read [AGENTS.md](AGENTS.md). Bump `version` in `.claude-plugin/marketplace.json` with every change, and run `node --test skills/setup/templates/scripts/check-feature-map.test.ts skills/implement-spec/scripts/metrics.test.ts`.
+Read [AGENTS.md](AGENTS.md). Bump `version` in `.claude-plugin/marketplace.json` with every change, and run `node --test skills/setup/templates/scripts/check-feature-map.test.ts skills/implement-spec/scripts/metrics.test.ts skills/setup/templates/scripts/check-code-map.test.ts`.

@@ -29,7 +29,7 @@ Left out: `ask-matt` (Matt's own), `setup-matt-pocock-skills` (replaced by `setu
 
 ## Ours
 
-- `setup`: writes the docs the other skills read, runs `create-verification-skill`, guards its feature map with `check-feature-map`, and writes project Claude settings and the cloud scripts.
+- `setup`: writes the docs the other skills read, a code map (`docs/code-map.md`, where each feature's code lives) guarded by `check-code-map`, runs `create-verification-skill`, guards its feature map with `check-feature-map`, moves `AGENTS.md` sections to their homes, and writes project Claude settings and the cloud scripts.
 - `afk`: the stance for any run the user is away from: decide as staff engineer and product owner, keep the work moving, and record every call for review. `implement` and `implement-spec` call it.
 - `prove-it`: a fresh `verifier` tests a PR on the local stack in a real browser and tries to break it; an implementer subagent fixes what it proves with a red test; one `Verdict` comment. Depth is set by risk-based testing and the PR's Merge Danger.
 - `implement-tickets`: runs `implement-spec` on `ready-for-agent` tickets that belong to no spec, after a notes subagent writes each unresearched ticket into the `to-tickets` shape.

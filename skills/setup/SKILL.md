@@ -67,7 +67,7 @@ Done when `.claude/settings.json` holds every template key and entry and every p
 
 Copy [setup-script.sh](templates/cloud/setup-script.sh) and [session-start.sh](templates/cloud/session-start.sh) to `.sandbox/claude-cloud/`, and fill the placeholders from the verify skill's Launch commands: the toolchain in the setup script, the fresh-clone steps in the hook. The setup script installs tools only; anything that reads the clone goes in the hook.
 
-The environment is the user's to create on claude.ai/code. Hand them the setup script to paste, the extra network hosts it names, and the two repositories to add: this one and `Aysnc-Labs/skills`.
+The environment is the user's to create on claude.ai/code. Hand them the setup script to paste and the extra network hosts it names.
 
 Done when neither script has a `{{` placeholder left.
 

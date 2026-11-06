@@ -32,7 +32,9 @@ Only what the PR changed: the **changed surface**, every page, admin screen and 
 
 4. **Test.** Start one fresh verifier, briefed with pointers only: the PR URL, the local site URL, the verify skill's path, the checklist path and, after the first round, the last verified commit. Done when it has returned `PASS`, `ISSUES` or `BLOCKED` with its method and evidence; rerun it once if it returns without them.
 
-5. **Fix.** When the verifier proves findings, start one implementer subagent briefed with this:
+5. **Fix.** You design each fix, as a staff engineer: the verifier proves damage, and its fix direction is one input. Brief the implementer with the smallest change that closes the damage it proved.
+
+   When the verifier proves findings, start one implementer subagent briefed with this:
 
    ```text
    Fix these findings on <PR URL>: <the verifier's findings>, with its tests: <their paths>.

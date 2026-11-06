@@ -44,4 +44,4 @@ Every agent picks what to test, and when, by **risk-based testing**. The full te
 
 7. Clean up every worktree, leaving the integration branch in the user's main checkout as a local branch, their HEAD untouched.
 
-8. Call the Skill tool with `aysnc:retro` on the PR. Then tell the user it is ready for `/aysnc:prove-it`, in a fresh session.
+8. Call the Skill tool with `aysnc:retro` on the PR, or on this run when there is none. Then tell the user the PR is ready for `/aysnc:prove-it`, in a fresh session.

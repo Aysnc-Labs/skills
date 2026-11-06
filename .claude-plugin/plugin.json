@@ -1,0 +1,9 @@
+{
+  "name": "aysnc-skills",
+  "description": "Aysnc Labs' engineering workflow for Claude Code: spec, tickets, AFK implementation and independent verification, built on Matt Pocock's skills",
+  "author": { "name": "Aysnc Labs", "url": "https://github.com/Aysnc-Labs" },
+  "homepage": "https://github.com/Aysnc-Labs/skills",
+  "repository": "https://github.com/Aysnc-Labs/skills",
+  "license": "MIT",
+  "keywords": ["claude-code", "skills", "workflow", "tdd", "code-review", "verification", "afk"]
+}

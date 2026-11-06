@@ -1,0 +1,13 @@
+{
+  "name": "aysnc",
+  "owner": { "name": "Aysnc Labs" },
+  "metadata": { "description": "Aysnc Labs' engineering workflow for Claude Code" },
+  "plugins": [
+    {
+      "name": "aysnc-skills",
+      "source": "./",
+      "description": "Spec to tickets to an AFK implementation, a PR that says what needs you, and a verdict from an agent that did not write the code. Built on Matt Pocock's skills.",
+      "version": "1.0.0"
+    }
+  ]
+}

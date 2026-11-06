@@ -1,6 +1,6 @@
 ---
 name: verifier
-description: Tests a PR's changed surface on the local stack like a careful human tester, in a real browser, and tries to break it. Started by aysnc:prove-it; do not start it yourself.
+description: Tests a PR's changed surface on the local stack like a careful human tester, in a real browser, and tries to break it. Started by the prove-it skill; do not start it yourself.
 model: inherit
 effort: medium
 ---

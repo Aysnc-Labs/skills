@@ -12,7 +12,7 @@ Left out: `ask-matt` (Matt's own), `setup-matt-pocock-skills` (replaced by `setu
 
 | Skill | Change |
 |---|---|
-| all | `/setup-matt-pocock-skills` pointers name `/aysnc:setup`. Skills that call `code-review`, `retro` or `prove-it` name them `aysnc:…`, since Claude Code's built-in `code-review` shares the name. |
+| all | `/setup-matt-pocock-skills` pointers name `/aysnc:setup`. Skills that call `code-review`, `retro` or `prove-it` name them `aysnc:…`, since Claude Code's built-in `code-review` shares the name; `prove-it` also gives the bare names, for cloud sessions, where the skills are user skills. |
 | `code-review` | A global ruleset in `rules/` beside the project's, its breaches hard findings. Long-standing docs name no specs or tickets. A check the change claims must be in the diff and fail without it. |
 | `diagnosing-bugs` | Question the premise after two failed fixes that share an assumption. A data-shaped bug adds a seed case beside its regression test. |
 | `domain-modeling` | A fourth ADR condition: only this project would decide it, since one skills change reaches every project. |

@@ -8,7 +8,7 @@ You are testing a PR the way a careful human tester would, so nobody has to. CI 
 
 Speed matters too: the PR waits on you. Work as fast as **risk-based testing** allows: the PR's Merge Danger sets the depth.
 
-The result comes from a **verifier** (`aysnc:verifier`) that did not write the code. Fixes come from an implementer subagent. No agent grades its own work. The verifier's rules (a gap is not a pass, evidence and damage for every finding) live in its agent file.
+The result comes from a **verifier** that did not write the code: the `aysnc:verifier` agent (`verifier` where the skills are installed as user skills, as in Claude Code cloud). Where neither agent type is offered, start a general-purpose subagent briefed to take [agents/verifier.md](../../agents/verifier.md) as its role. Fixes come from an implementer subagent. No agent grades its own work. The verifier's rules (a gap is not a pass, evidence and damage for every finding) live in its agent file.
 
 ## Scope
 
@@ -16,12 +16,14 @@ Only what the PR changed: the **changed surface**, every page, admin screen and 
 
 ## Steps
 
-1. **Pin the PR.** Read it with `gh pr view <n> --comments`: its branch, body and linked issues.
+1. **Pin the PR.** Read it with `gh pr view <n> --comments`, or the GitHub MCP tools where `gh` is not available (Claude Code cloud): its branch, body and linked issues.
+   - **Fix branch.** Fixes go on the PR branch. When the session may push only to its own branch (Claude Code cloud names one), they go there instead: open one PR from it into the PR branch at the first push, and say so in For Human. The user may name another branch.
    - The local stack serves the main checkout. When `git status` there shows uncommitted changes, work in a fresh worktree of the PR branch instead, and leave the main checkout untouched.
    - Otherwise note the current branch, check out the PR branch and pull it, then bring the stack onto it with the project's verify skill (`.claude/skills/verify-<app>/`): its Launch and Doctor, plus installs and migrations.
+   - On Claude Code cloud, wait for the SessionStart hook's preparation to finish first, as the verify skill says.
    - Prove the stack serves the PR: request something only the PR's code produces. If it does not, restart the dev servers and check again; if it still does not, stop and tell the user.
 
-2. **Checklist.** The project's `docs/agents/verification.md`. When it is missing, copy [verification.md](verification.md) there, commit it to the PR branch, and say so in For Human.
+2. **Checklist.** The project's `docs/agents/verification.md`. When it is missing, copy [verification.md](verification.md) there, commit it to the fix branch, and say so in For Human.
 
 3. **Verification steps.** When the PR body has no Verification section, write one from the diff, the linked issues and the verify skill's feature files for the behaviour the diff touches, with the `pr` skill's Verification format: every behaviour the PR changed. Say in For Human that the verifier wrote it.
 
@@ -31,17 +33,17 @@ Only what the PR changed: the **changed surface**, every page, admin screen and 
 
    ```text
    Fix these findings on <PR URL>: <the verifier's findings>, with its tests: <their paths>.
-   Work in the main checkout on the PR branch, against the project's default test database.
+   Work in the main checkout on <the fix branch>, against the project's default test database.
    Each fix comes with a red test covering every site with the same defect, or a repro receipt where no test can show it. Commit with the project's convention, and push nothing.
    A finding whose fix needs a choice the `pr` skill's Needs decision describes stays unfixed: say what the choice is.
    Your final message lists each finding with its fix commit, or the choice it waits on.
    ```
 
-   A finding left for a choice goes to For Human. Push its commits to the PR branch, then go back to step 4 with a fresh verifier that verifies what changed since the last verified commit, and its blast radius, and confirms each fix. The user stops the loop when they choose; it ends on its own when a round proves nothing the fixer can fix, or only `quality` and `UX` damage, which goes in the Verdict as notes. Then call the Skill tool with `aysnc:code-review` on the fix commits, and send what it finds through this step.
+   A finding left for a choice goes to For Human. Push its commits to the fix branch, rebuild the stack onto them, then go back to step 4 with a fresh verifier that verifies what changed since the last verified commit, and its blast radius, and confirms each fix. The user stops the loop when they choose; it ends on its own when a round proves nothing the fixer can fix, or only `quality` and `UX` damage, which goes in the Verdict as notes. Then call the Skill tool with `aysnc:code-review` (`code-review` as a user skill) on the fix commits, and send what it finds through this step.
 
    A step the verifier marks `step wrong`: confirm it, then reword it in the PR body. When the right expectation is a choice, it is **Needs decision**.
 
-6. **Post.** Write the PR's single `Verdict` comment: edit it when it exists (`gh api --method PATCH repos/<owner>/<repo>/issues/comments/<id> -F body=@<file>`), create it otherwise. The Verdict is the PR's whole testing record, which `gardening` reads after merge: keep every finding from earlier runs with its current status, and add the new ones. Rewrite only the For Human section of the PR body.
+6. **Post.** Write the PR's single `Verdict` comment: edit it when it exists (`gh api --method PATCH repos/<owner>/<repo>/issues/comments/<id> -F body=@<file>`, or the MCP tool that updates an issue comment), create it otherwise. The Verdict is the PR's whole testing record, which `gardening` reads after merge: keep every finding from earlier runs with its current status, and add the new ones. Rewrite only the For Human section of the PR body.
 
 7. **Restore.** Run the verify skill's Cleanup, delete the data the run created, and check the user's original branch back out with the stack on it, or remove the worktree.
 

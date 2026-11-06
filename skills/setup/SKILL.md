@@ -59,7 +59,12 @@ Merge [claude-settings.json](templates/claude-settings.json) into `.claude/setti
 
 ## 6. Cloud
 
-Copy [setup-script.sh](templates/cloud/setup-script.sh) and [session-start.sh](templates/cloud/session-start.sh) to `.sandbox/claude-cloud/`, and fill the placeholders from the verify skill's Launch commands: the toolchain in the setup script, the fresh-clone steps in the hook. The setup script installs tools only; anything that reads the clone goes in the hook.
+Copy [setup-script.sh](templates/cloud/setup-script.sh), [session-start.sh](templates/cloud/session-start.sh) and [link-skills.sh](templates/cloud/link-skills.sh) to `.sandbox/claude-cloud/`, and fill the placeholders from the verify skill's Launch commands: the toolchain in the setup script, the fresh-clone steps in the hook, and `{{repo}}` with the repository's folder name. The setup script installs tools only; anything that reads the clone goes in the hook.
+
+Why the scripts are shaped this way:
+- **A reused container skips the setup script.** The platform often starts a session in an earlier session's container (`resume-cached`), so what must hold every session lives in the hook, and the skills are linked, not copied, so they follow the checkout the platform updates.
+- **Several repositories load no repository's settings.** The project directory is then the folder that holds them, so the setup script registers the hook and the push denies in user settings too, and the hook takes a lock in case both run it.
+- **User skills have no plugin prefix.** In cloud the user types `/prove-it`, not `/aysnc:prove-it`.
 
 The environment itself is the user's to create on claude.ai/code. Hand them: the setup script to paste, the extra network hosts the script names, and access to `Aysnc-Labs/skills` and this repository.
 

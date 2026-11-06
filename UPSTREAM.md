@@ -31,7 +31,7 @@ Left out: `ask-matt` (Matt's own), `setup-matt-pocock-skills` (replaced by `setu
 
 - `setup`: writes the docs the other skills read, a code map (`docs/code-map.md`, where each feature's code lives) guarded by `check-code-map`, runs `create-verification-skill`, guards its feature map with `check-feature-map`, moves `AGENTS.md` sections to their homes, and writes project Claude settings and the cloud scripts.
 - `afk`: the stance for any run the user is away from: decide as staff engineer and product owner, keep the work moving, and record every call for review. `implement` and `implement-spec` call it.
-- `prove-it`: a fresh `verifier` tests a PR on the local stack in a real browser and tries to break it; an implementer subagent fixes what it proves with a red test; one `Verdict` comment. Depth is set by risk-based testing and the PR's Merge Danger.
+- `prove-it`: a fresh `verifier` tests a PR on the local stack in a real browser and tries to break it; an implementer subagent fixes what it proves with a red test; one `Verdict` comment. Depth is set by risk-based testing and the PR's Merge Danger In a cloud session, fixes go on the session's branch with a PR into the PR branch.
 - `implement-tickets`: runs `implement-spec` on `ready-for-agent` tickets that belong to no spec, after a notes subagent writes each unresearched ticket into the `to-tickets` shape.
 - `gardening`: a manual sweep across runs: repeated lessons filed as `needs-triage` issues, health checks, queue tidying, one report issue.
 - `agents/`: `verifier` (for `prove-it`) and `researcher` (for `grill-with-docs`), the two roles that need tool limits or a fixed findings shape. Implementers are general-purpose subagents.

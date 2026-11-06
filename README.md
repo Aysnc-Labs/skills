@@ -19,7 +19,7 @@ On a laptop:
 
 Then turn on auto-update: `/plugin` → Marketplaces → `aysnc` → Enable auto-update. A repository that has run `/aysnc:setup` enables the plugin in its own `.claude/settings.json`.
 
-In a Claude Code cloud session plugins are not installed; the project's `.sandbox/claude-cloud/setup-script.sh` copies the skills and agents into `~/.claude/`.
+In a Claude Code cloud session plugins are not installed. Attach this repository to the environment; the project's `.sandbox/claude-cloud/setup-script.sh` links it into `~/.claude/skills/aysnc`, where it loads as the plugin, names unchanged.
 
 ## Set up a project
 

@@ -33,7 +33,16 @@ Look for the originating spec, in this order:
 
 ### 3. Identify the standards sources
 
-Search the repo for every file that documents how code should be written. When `CODING_STANDARDS.md` or `CONTRIBUTING.md` exists, it must be on the list.
+Two rulesets feed the Standards axis; the **project** ruleset wins where they disagree:
+
+- **Global**: the shared rules in `rules/`, one file per area. Read every file whose area the diff touches. Every breach is a hard finding.
+- **Project**: every file in the repo that documents how code should be written; search for them. When `CODING_STANDARDS.md` or `CONTRIBUTING.md` exists, it must be on the list.
+
+| Area | Global rules |
+| --- | --- |
+| Every diff | [rules/general.md](rules/general.md) |
+
+The Standards axis also checks every **claimed check**: when the change, its commits or its PR text say a lint rule, test, type or script now enforces something, that check is in the diff and fails without the change. A claim with no check in the diff is a hard finding.
 
 On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below: a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
 
@@ -62,7 +71,7 @@ Issue both sub-agent calls together, in the foreground, and aggregate the report
 **Standards sub-agent prompt** should include:
 
 - The full diff command and commit list.
-- The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full (the sub-agent has no other access to it).
+- The list of standards-source files you found in step 3, **plus the claimed-check rule and the smell baseline from step 3** pasted in full (the sub-agent has no other access to them).
 - The brief: "Report, per file/hunk where relevant, (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls: documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
 
 **Spec sub-agent prompt** should include:

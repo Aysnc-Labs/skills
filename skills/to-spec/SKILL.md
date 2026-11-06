@@ -64,6 +64,10 @@ A list of testing decisions that were made. Include:
 - Which modules will be tested
 - Prior art for the tests (i.e. similar types of tests in the codebase)
 
+## Research
+
+The high-level findings from the grilling's deep research: constraints the code or outside systems impose, prior art to follow, risks, and each source with its link. No file paths: those go in each ticket's Implementation notes.
+
 ## Out of Scope
 
 A description of the things that are out of scope for this spec.

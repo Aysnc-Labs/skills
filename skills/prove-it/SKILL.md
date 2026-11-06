@@ -14,6 +14,11 @@ The result comes from a **verifier** (`aysnc:verifier`) that did not write the c
 
 Only what the PR changed: the **changed surface**, every page, admin screen and endpoint that renders, runs or returns code the diff changed.
 
+## In a cloud session
+
+- The GitHub MCP tools do what the steps' `gh` commands do.
+- The session pushes only to its own branch. Start it from the PR's head, and wherever the steps commit or push to the PR branch, use it instead. Open one PR from it into the PR branch, and name that PR in the Verdict and For Human.
+
 ## Steps
 
 1. **Pin the PR.** Read it with `gh pr view <n> --comments`: its branch, body and linked issues.

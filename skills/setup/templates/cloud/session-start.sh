@@ -2,8 +2,11 @@
 # SessionStart hook (.claude/settings.json) for Claude Code cloud sessions. Prepares a fresh clone in
 # the background so the session starts at once, and only restarts services on a resume, since a cloud
 # VM keeps files but not processes. Does nothing on a laptop.
+#
+# With several repositories the setup script registers it in the VM's user settings, where
+# $CLAUDE_PROJECT_DIR is the folder above the clones, so it finds its own checkout instead.
 [ "${CLAUDE_CODE_REMOTE:-}" = true ] || exit 0
-cd "$CLAUDE_PROJECT_DIR" || exit 0
+cd "$(dirname "$0")/../.." || exit 0
 
 state=/tmp/project-up
 mkdir -p "$state"

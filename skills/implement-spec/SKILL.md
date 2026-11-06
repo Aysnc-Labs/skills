@@ -44,4 +44,8 @@ Every agent picks what to test, and when, by **risk-based testing**. The full te
 
 7. Clean up every worktree, leaving the integration branch in the user's main checkout as a local branch, their HEAD untouched.
 
-8. Call the Skill tool with `aysnc:retro` on the PR. Then tell the user it is ready for `/aysnc:prove-it`, in a fresh session.
+8. With a PR, prove it once its checks are green; a red check goes to a fresh implementer subagent with the failing step's log. Start a fresh subagent, one that wrote none of the code, briefed with the PR URL to read `../prove-it/SKILL.md` and follow it.
+
+   Done when the PR carries a `Verdict` comment.
+
+9. Call the Skill tool with `aysnc:retro` on the PR, or on this run when there is none. Then tell the user the PR is ready for their review.

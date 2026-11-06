@@ -17,8 +17,8 @@ Only what the PR changed: the **changed surface**, every page, admin screen and 
 ## Steps
 
 1. **Pin the PR.** Read it with `gh pr view <n> --comments`: its branch, body and linked issues.
-   - The local stack serves the main checkout. If `git status` there shows uncommitted changes, stop and ask the user.
-   - Note the current branch, check out the PR branch and pull it, then bring the stack onto it with the project's verify skill (`.claude/skills/verify-<app>/`): its Launch and Doctor, plus installs and migrations.
+   - The local stack serves the main checkout. When `git status` there shows uncommitted changes, work in a fresh worktree of the PR branch instead, and leave the main checkout untouched.
+   - Otherwise note the current branch, check out the PR branch and pull it, then bring the stack onto it with the project's verify skill (`.claude/skills/verify-<app>/`): its Launch and Doctor, plus installs and migrations.
    - Prove the stack serves the PR: request something only the PR's code produces. If it does not, restart the dev servers and check again; if it still does not, stop and tell the user.
 
 2. **Checklist.** The project's `docs/agents/verification.md`. When it is missing, copy [verification.md](verification.md) there, commit it to the PR branch, and say so in For Human.
@@ -43,7 +43,7 @@ Only what the PR changed: the **changed surface**, every page, admin screen and 
 
 6. **Post.** Write the PR's single `Verdict` comment: edit it when it exists (`gh api --method PATCH repos/<owner>/<repo>/issues/comments/<id> -F body=@<file>`), create it otherwise. The Verdict is the PR's whole testing record, which `gardening` reads after merge: keep every finding from earlier runs with its current status, and add the new ones. Rewrite only the For Human section of the PR body.
 
-7. **Restore.** Run the verify skill's Cleanup, delete the data the run created, and check the user's original branch back out with the stack on it.
+7. **Restore.** Run the verify skill's Cleanup, delete the data the run created, and check the user's original branch back out with the stack on it, or remove the worktree.
 
 ## Verdict
 

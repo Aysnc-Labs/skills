@@ -25,9 +25,9 @@ Every candidate cites its **evidence**: a Report, a Verdict finding, a review co
 - **Research gaps**: Implementation notes that were stale or missing. _Use when_ a Report's Research gaps is not `none`.
 - **Struggles**: what agents said took longest or was unclear. _Use when_ it matches a metrics outlier.
 
-3. Present these candidates to the user, in order of severity, each with its evidence and proposed home. A **global lesson**, one every project needs, has its home in the shared skills, never a project doc. When a candidate's home is skill prose, call the Skill tool with `writing-for-agents` before drafting it.
+3. Order the candidates by severity, each with its evidence and proposed home. A **global lesson**, one every project needs, has its home in the shared skills, never a project doc. When a candidate's home is skill prose, call the Skill tool with `writing-for-agents` before drafting it.
 
-4. Post the candidates the user accepts as the PR's single comment headed `Retro` (edit it when it exists), each with its evidence and proposed home. `gardening` reads these comments to find lessons that repeat across runs. File no issues and implement nothing.
+4. Show them to the user and post the ones they accept; in an AFK run, post every one, since nothing here changes the code and `gardening` acts only on a lesson seen twice. Post them as the PR's single comment headed `Retro` (edit it when it exists), each with its evidence and proposed home. `gardening` reads these comments to find lessons that repeat across runs. File no issues and implement nothing.
 
 ## Reference
 

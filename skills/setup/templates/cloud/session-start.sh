@@ -2,11 +2,13 @@
 # SessionStart hook (.claude/settings.json) for Claude Code cloud sessions. Prepares a fresh clone in
 # the background so the session starts at once, and only restarts services on a resume, since a cloud
 # VM keeps files but not processes. Does nothing on a laptop.
-#
-# With several repositories the setup script registers it in the VM's user settings, where
-# $CLAUDE_PROJECT_DIR is the folder above the clones, so it finds its own checkout instead.
 [ "${CLAUDE_CODE_REMOTE:-}" = true ] || exit 0
 cd "$(dirname "$0")/../.." || exit 0
+
+# The Aysnc Skills plugin that setup-script.sh cloned, brought up to date: a reused environment cache
+# can be days old. Fetch and reset rather than pull, so a force-pushed main still lands.
+plugin=$HOME/.claude/skills/aysnc-skills
+{ git -C "$plugin" fetch --quiet --depth 1 origin main && git -C "$plugin" reset --quiet --hard FETCH_HEAD; } 2>/dev/null || echo "Could not refresh the Aysnc Skills plugin in $plugin"
 
 state=/tmp/project-up
 mkdir -p "$state"

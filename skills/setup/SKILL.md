@@ -20,7 +20,7 @@ Every file this skill writes must be tracked: `git check-ignore -v <file>` print
 
 ## 2. Verification skill
 
-Read `../create-verification-skill/SKILL.md` and follow it. It writes `.claude/skills/verify-<app>/`: how to launch, check, drive and clean up the app, and its feature map. `prove-it`, `walkthrough` and `implement-spec` read it, and every agent working in the repo can load it by its description.
+Read `../create-verification-skill/SKILL.md` and follow it. It writes `.claude/skills/verify-<app>/`: how to launch, check, drive and clean up the app, and its feature map. `prove-it`, its `verifier`, `grill-with-docs` and `implement-spec` read it, and every agent working in the repo can load it by its description.
 
 Its Launch section also covers a Claude Code cloud session (`CLAUDE_CODE_REMOTE=true`): what step 5's hook already started, where its log is, and what differs from a laptop. Mark what you could not run here as unverified, as that skill's step 4 says for a stand-in.
 

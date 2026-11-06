@@ -7,4 +7,4 @@ One Claude Code plugin (`aysnc`), published through the marketplace in `.claude-
 - Write each skill in our own words. Prefer Matt's vocabulary (frontier, seam, tracer bullet, AFK) where a term exists.
 - Project-specific knowledge belongs in the project (its `AGENTS.md`, `docs/agents/`, its verify skill), never in a skill. A skill names the file to read.
 - Bump the version in `.claude-plugin/marketplace.json` with every change: installs update only when it moves.
-- Test: `node --test skills/setup/templates/scripts/check-feature-map.test.ts`.
+- Test: `node --test skills/setup/templates/scripts/check-feature-map.test.ts skills/implement-spec/scripts/metrics.test.ts`.

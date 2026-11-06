@@ -14,11 +14,11 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 
 ### 1. Gather context
 
-Work from whatever is already in the conversation context. If the user passes a reference (a spec path, an issue number or URL) as an argument, fetch it and read its full body and comments.
+Work from whatever is already in the conversation context. If the user passes a reference (a spec path, an issue number or URL) as an argument, fetch it and read its full body, every comment, and everything it links to, recursively, until a hop adds nothing.
 
-### 2. Explore the codebase (optional)
+### 2. Explore the codebase
 
-If you have not already explored the codebase, do so to understand the current state of the code. Ticket titles and descriptions should use the project's domain glossary vocabulary, and respect ADRs in the area you're touching.
+Start from the grilling's Research and Code pointers records and the spec's Research section; explore what they leave open, so you understand the current state of the code. Ticket titles and descriptions should use the project's domain glossary vocabulary, and respect ADRs in the area you're touching.
 
 Look for opportunities to prefactor the code to make the implementation easier. "Make the change easy, then make the easy change."
 
@@ -46,6 +46,8 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 - **Title**: short descriptive name
 - **Blocked by**: which other tickets (if any) must complete first
 - **What it delivers**: the end-to-end behaviour this ticket makes work
+- **Test data**: the data states its tests need (a sold-out product, an editor with no permissions), each a seed case when the project keeps a seed
+- **Verify**: how to prove it works: the automated test at its seam, and the live check on the local environment
 
 Ask the user:
 
@@ -55,9 +57,15 @@ Ask the user:
 
 Iterate until the user approves the breakdown.
 
-### 5. Publish the tickets to the configured tracker
+### 5. Write each ticket's Implementation notes
 
-Publish the approved tickets. **How** depends on the tracker `/aysnc:setup` configured; the tickets are the same either way, only the shape of the blocking edges changes:
+The implementer should start building, not researching: front-load the detail here. The research was done while grilling; write each approved ticket's slice of it from the grilling's Research and Code pointers records and the spec's Research section, checking each path against the code. Each ticket's **Implementation notes** hold: the files to change and the patterns to follow, with paths; the test seam and prior-art tests; the data its tests need; risks and overlaps with other tickets; and the **Skills to load**. Stamp them with the commit they were true at (`git rev-parse --short HEAD`). Fill a factual gap the records leave from the code yourself; a decision they leave goes to the user.
+
+Done when: every ticket has Implementation notes and no note says "unknown".
+
+### 6. Publish the tickets to the configured tracker
+
+Publish the approved tickets. **How** depends on the configured tracker; the tickets are the same either way, only the shape of the blocking edges changes:
 
 - **Local files** → write one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, numbered from `01` in dependency order (blockers first). Each file's "Blocked by" lists the numbers/titles it depends on. Use the per-ticket file template below: one ticket per file, never a single combined file.
 - **A real issue tracker (GitHub, Linear, …)** → publish one issue per ticket in dependency order (blockers first) so each ticket's blocking edges can reference real identifiers. Use the platform's native blocking relationship where it has one; otherwise set each ticket's "Blocked by" to the blocking issues. If the source was an existing issue, make each ticket its sub-issue (tracker doc's operation). Apply the `ready-for-agent` triage label unless instructed otherwise; the tickets are agent-grabbable by construction.
@@ -79,7 +87,11 @@ Do NOT close or modify any parent issue.
 - [ ] Acceptance criterion 1
 - [ ] Acceptance criterion 2
 
-**Try it:** numbered steps a person follows to see this ticket work once it lands: start state → action → what they see.
+**Test data:** the data states the tests need, each a seed case when the project keeps a seed.
+
+**Implementation notes** (as of `<sha>`): files and patterns with paths, test seam, data, risks, Skills to load.
+
+**Verify:** the automated test at its seam, and the live check on the local environment.
 
 </local-ticket-template>
 
@@ -98,9 +110,18 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 - [ ] Criterion 1
 - [ ] Criterion 2
 
-## Try it
+## Test data
 
-1. <start state> → <action> → <what they see>
+The data states the tests need, each a seed case when the project keeps a seed.
+
+## Implementation notes
+
+As of `<sha>`. Files to change and patterns to follow, with paths; the test seam and prior-art tests; data; risks and overlaps with other tickets; **Skills to load**.
+
+## Verify
+
+- **Automated:** the test at its seam that proves the behaviour.
+- **Live:** the check on the local environment: a URL, admin screen or command and its expected result.
 
 ## Blocked by
 
@@ -108,6 +129,4 @@ The end-to-end behaviour this ticket makes work, from the user's perspective, no
 
 </issue-template>
 
-**Try it** is what the PR's Try it is built from, so write it for someone who has never seen the code. A ticket no person can observe (a type, a build rule) gets the command that shows it and the expected output.
-
-In either form, avoid specific file paths or code snippets: they go stale fast. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.
+Outside Implementation notes, avoid specific file paths or code snippets: they go stale fast, which is why the notes carry their commit. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it and note briefly that it came from a prototype. Trim to the decision-rich parts, not a working demo, just the important bits.

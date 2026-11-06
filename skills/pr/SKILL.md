@@ -12,16 +12,11 @@ metadata:
 Use this template for writing the PR body:
 
 ```markdown
-## Summary
+## 👋 For Human
 
-<diagram, diff-sketch, or tree>
+<optional: only what needs a person>
 
-## Evidence
-
-- **Before:** <screenshot/output/failing test run>
-  **After:** <screenshot/output/passing test run>
-
-## Merge Danger
+## 💥 Merge Danger
 
 **Door:** <one-way or two-way>
 
@@ -31,30 +26,55 @@ Use this template for writing the PR body:
 
 <optional: potential ramifications of merge>
 
-## Try it
+**Accepted risks:** <optional: what the merge knowingly carries, and who accepted it>
 
-**Start:** <the verify skill's Launch, plus the branch-specific setup: data, accounts, flags>
+## 📝 Summary
 
-1. <start state> → <action> → <what you see>
+<diagram, diff-sketch, or tree>
 
-## Not tried
+## 🧪 Evidence
 
-- <what the author could not check, and why>
+- **Before:** <screenshot/output/failing test run>
+  **After:** <screenshot/output/passing test run>
 
-## Calls made for you
+## 🔍 Verification
 
-- <a call an agent made where you would normally decide, and why>
+<optional: collapsed groups of steps>
 
-Closes #<n>, closes #<n>
+## 🔒 Closes
+
+<optional: the issues this PR closes>
 ```
 
 ## Sections
 
-Skip all preambles and keep prose brief. Use the user's domain language from `GLOSSARY.md`.
+Skip all preambles and keep prose brief. Use the user's domain language from `GLOSSARY.md`. Emoji go on the section headings only. Leave out an optional section that has nothing in it. Other skills fill these sections; they never add their own.
+
+### For Human
+
+At the top, so a reader knows in one line whether they are needed. Only these, each left out when empty:
+
+- **Needs decision:** a choice only the business or the user can make: a fix that would change behaviour the spec or ticket did not decide (copy, pricing, policy, legal wording), or a cause in data rather than code.
+- **Check by eye:** what an agent cannot judge: look and feel, brand tone, a real device, a third-party tool such as Google's Rich Results Test.
+- **Not verified:** what nobody could check, and why.
+- **Decisions for review:** each choice an agent made for the user during an AFK run, with its reason.
+- **Before testing:** the one-line setup a tester needs.
+
+When nothing needs a person, write `Nothing needs you right now.`
+
+### Merge Danger
+
+Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
+
+The blast radius is the potential impact or scope of the changes introduced by this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
+
+Accepted risks are known defects or gaps the merge carries on purpose, each with who accepted it (the spec, a ticket, the user).
 
 ### Summary
 
 Pick the smallest view that makes the key point clear.
+
+A multi-ticket PR's Summary also holds a **Tickets table**: each ticket by title and link, its state (✅ merged with a link to its Report, 🔄 in progress, ⛔ blocked by which ticket, or not started) and one line on what it delivered.
 
 - Show logic or an algorithm as pseudocode:
 
@@ -179,28 +199,30 @@ Screenshots are S-tier - when the environment is set up for it and the change is
 
 Execution-based evidence is A-tier. Test results, console output. Show the exact test that now fails and passes, using pseudocode.
 
-### Merge Danger
+### Verification
 
-Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
+Every behaviour the PR changed, as steps a person or the `aysnc:prove-it` skill can run on the local stack: happy path, failure paths, edge cases and admin flows. Group the steps by area, each group collapsed with its count, one `- [ ]` step per line written as `where → what you should see`:
 
-The blast radius is the potential impact or scope of the changes introduced by this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
+```markdown
+<details><summary><b>Checkout</b> (2)</summary>
 
-### Try it
+- [ ] `/cart` with one item → Pay shows the total with tax
+- [ ] Pay with a declined test card → the error names the card, and the cart is kept
+</details>
+```
 
-The script a person follows to see the change work, and what `prove-it` treats as the author's own exam. Write it for someone who has never seen the diff and starts from a fresh clone.
+On a multi-ticket PR, every item in every Report's Untested becomes a step. Done when each one has its step.
 
-- **Start** names everything before step 1: the project's verify skill (`.claude/skills/verify-<app>/`) Launch and Doctor, then only what this branch adds to them (a seed, an account, a flag, an env var name).
-- One numbered step per behaviour the PR changes: a start state, one action, and what they should see. "Open `/` in the playground → read the heading → it says `Oz playground`", not "check the homepage works".
-- Reuse the **Try it** steps of the closed tickets and the Driving steps of the verify skill's feature files the diff touches.
-- Cover what users see first, then what only the diff's edges reach: the empty state, the error, the second click.
-- A change no person can observe (a type, a guard, a build rule) gets one step that runs the command which shows it, and its expected output.
+### Closes
 
-Done when every behaviour in Summary has a step whose expected result could fail.
+A **Spec** line, then a **Tickets** list, one closing keyword per line with the issue's title, so the reader sees what merging closes without opening each link. Name anything that deliberately stays open.
 
-### Not tried
+```markdown
+Merging closes the spec and every ticket below. #41 stays open for the launch checklist.
 
-What the author could not run or see: a surface it could not reach, a state it could not create, a browser it did not have. It is where a verifier looks first, so an honest list beats an empty one. Each item that a person could check also gets a Try it step. Omit the section only when everything was tried.
+**Spec**
+- Closes #12 · Guest checkout
 
-### Calls made for you
-
-Calls an agent made where the user would normally decide, each with its reason, so the user reviews them in one place. Omit the section when there are none.
+**Tickets**
+- Closes #15 · Keep the cart when a payment is declined
+```

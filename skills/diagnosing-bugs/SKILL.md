@@ -95,6 +95,8 @@ Each hypothesis must be **falsifiable**: state the prediction it makes.
 
 If you cannot state the prediction, the hypothesis is a vibe: discard or sharpen it.
 
+**Question the premise.** When two fixes that share an assumption have failed, list what every hypothesis so far takes for granted (the bug is in this module, the input is what the log says, the loop measures the bug) and test that assumption before writing a third fix.
+
 **Show the ranked list to the user before testing.** They often have domain knowledge that re-ranks instantly ("we just deployed a change to #3"), or know hypotheses they've already ruled out. Cheap checkpoint, big time saver. Don't block on it; proceed with your ranking if the user is AFK.
 
 ## Phase 4: Instrument
@@ -126,6 +128,8 @@ If a correct seam exists:
 3. Apply the fix.
 4. Watch it pass.
 5. Re-run the Phase 1 feedback loop against the original (un-minimised) scenario.
+
+When the bug is **data-shaped** (its cause is the shape of data) and the project keeps a seed (named in the verify skill's feature map), add the seed case it missed beside the regression test, so every fresh instance shows it.
 
 ## Phase 6: Cleanup
 

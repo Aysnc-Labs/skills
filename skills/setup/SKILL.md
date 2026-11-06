@@ -63,11 +63,13 @@ Copy [setup-script.sh](templates/cloud/setup-script.sh) and [session-start.sh](t
 
 The environment itself is the user's to create on claude.ai/code. Hand them: the setup script to paste, the extra network hosts the script names, and access to `Aysnc-Labs/skills` and this repository.
 
-## 7. Pointers
+## 7. AGENTS.md
 
-Add or update one `## Agent skills` block in `AGENTS.md` (or `CLAUDE.md` when only that exists): one line per `docs/agents/` file, the code map, the verify skill, and `CODING_STANDARDS.md`, each saying when to read it.
+Write `AGENTS.md` from [the template](templates/AGENTS.md) (into `CLAUDE.md` when only that exists), keeping the project's lines that fit it. It loads on every turn, so it holds the gate, commands and conventions nothing enforces, and pointers.
 
-`AGENTS.md` loads on every turn, so it holds the gate command, the conventions no tool enforces, and pointers. Propose a home for every other section: a code map entry (where code lives), a comment or check message where the agent edits (a gotcha or procedure), a `GLOSSARY.md` term, an ADR, a `CODING_STANDARDS.md` rule, a check (a mechanical rule), or deletion (it restates code, config or a skill). Show the table and move only what the user agrees.
+Propose a home for every other line: a code map entry (where code lives), a comment or check message where the agent edits (a gotcha or procedure), a `GLOSSARY.md` term, an ADR, a `CODING_STANDARDS.md` rule, a check (a mechanical rule, after which the line goes), or deletion (it restates code, config or a skill). Show the table and move only what the user agrees.
+
+Done when every line of the old file is in the new one or has its agreed home.
 
 ## 8. Report
 

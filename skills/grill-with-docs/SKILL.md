@@ -11,7 +11,7 @@ The spec and tickets that follow are the only thing the implementing agents read
 1. Call the Skill tool for `grilling`, `domain-modeling` and `codebase-design`, and follow all three: decide where the seams and modules go while grilling, not later.
 2. Read the `SKILL.md` of `to-spec` and `to-tickets`, in the folders beside this skill's own. The grilling feeds them, so gather in their shape from the start. Do not run them.
 3. When the user points at an issue, pull request or link, read all of it: the body, every comment, and everything it links to, recursively, until a hop adds nothing.
-4. Read `GLOSSARY.md`, the ADRs in `docs/adr/` for the area, and the feature map of the project's verify skill (`.claude/skills/verify-<app>/`) when it exists: the shortest path to what each feature does for its users.
+4. Read `GLOSSARY.md`, the ADRs in `docs/adr/` for the area, `docs/code-map.md` for where each feature's code lives, and the feature map of the project's verify skill (`.claude/skills/verify-<app>/`) when it exists: the shortest path to what each feature does for its users.
 
 ## While grilling
 

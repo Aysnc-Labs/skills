@@ -1,12 +1,12 @@
 ---
 name: setup
-description: "Set a repository up for the Aysnc skills: issue tracker and triage docs, a verification skill with a checked feature map, coding standards, project Claude settings, and the Claude Code cloud scripts. Idempotent: re-run to repair drift."
+description: "Set a repository up for the Aysnc skills: issue tracker and triage docs, a checked code map, a verification skill with a checked feature map, coding standards, project Claude settings, and the Claude Code cloud scripts. Idempotent: re-run to repair drift."
 disable-model-invocation: true
 ---
 
 Adopt an existing repository so the other skills work in it, on a laptop and in a Claude Code cloud session. Every file below is one the skills read; the skills never guess where things live.
 
-Explore before writing: `git remote -v`, `AGENTS.md` and `CLAUDE.md`, `docs/agents/`, `GLOSSARY.md`, `docs/adr/`, `.claude/`, `.gitignore`, the package manifest and its check command, the git hooks and the CI workflows. Update what exists in place and keep the project's own additions. Present your findings and a draft of each file, lead each choice with the recommended answer, and write only after the user agrees.
+Explore before writing: `git remote -v`, `AGENTS.md` and `CLAUDE.md`, `docs/agents/`, `docs/code-map.md`, `GLOSSARY.md`, `docs/adr/`, `.claude/`, `.gitignore`, the package manifest and its check command, the git hooks and the CI workflows. Update what exists in place and keep the project's own additions. Present your findings and a draft of each file, lead each choice with the recommended answer, and write only after the user agrees.
 
 Every file this skill writes must be tracked: `git check-ignore -v <file>` prints nothing. A `.gitignore` that ignores everything and re-includes entries (`/*` then `!/<entry>`) silently drops a new root file or folder; add its `!` line.
 
@@ -31,11 +31,24 @@ Then guard the feature map:
 
 Done when the generated skill was proven end to end as `create-verification-skill` requires, and the check prints its summary line and its test passes through the project's check command.
 
-## 3. Coding standards
+## 3. Code map
+
+`docs/code-map.md` says where each feature's code lives; agents start every task there instead of searching. The verify skill's feature map says what users see; the code map says where to look.
+
+A **feature** is something a user, developer or operator can name and ask to change, with its own place in the code. A smaller part is a keyword of its parent.
+
+1. Pick the **coverage roots**: the folders whose every child must belong to a feature (packages, apps, source folders; `files` for a folder of scripts). Show them with the draft.
+2. Fan out read-only explorers in parallel, one per coverage root plus one for infrastructure (CI, root config, scripts). Each lists every child of its roots and returns candidate features in the [template](templates/code-map.md)'s entry shape. Merge them into one entry per feature under `## ` areas, and draw who calls whom.
+3. Confirm the feature list with the user: names, grouping, and anything merged, split or left as a keyword. Then write the map.
+4. Copy [check-code-map.ts](templates/scripts/check-code-map.ts) and [its test](templates/scripts/check-code-map.test.ts) beside `check-feature-map`, set `COVERAGE_ROOTS`, and wire both in the same way. A failure names the map line or the uncovered module: fix the map, not the script.
+
+Done when every coverage-root child is claimed by a feature and the check prints its summary line through the project's check command.
+
+## 4. Coding standards
 
 Write `CODING_STANDARDS.md` from [the template](templates/CODING_STANDARDS.md). Fill "Enforced by tools" from the lint, type and check configuration, and "Review rules" only with judgment calls the project already holds (in `AGENTS.md`, docs, or review history), each with its source.
 
-## 4. Claude settings
+## 5. Claude settings
 
 Merge [claude-settings.json](templates/claude-settings.json) into `.claude/settings.json`: add missing keys and entries, never drop or reorder the project's. A `!` rule exempts paths only from the rules before it in the same file, so keep each after the rule it carves out.
 
@@ -44,16 +57,20 @@ Merge [claude-settings.json](templates/claude-settings.json) into `.claude/setti
 - The `Read` denies cover Claude's file tools, not `cat` in a shell. The push denies match a command as written, so `git -C . push` slips past them. They catch accidents; the default branch's protection on the forge is what stops a push. Offer to add a branch protection rule or ruleset requiring a PR.
 - Adjust `main` in the push denies to the default branch.
 
-## 5. Cloud
+## 6. Cloud
 
 Copy [setup-script.sh](templates/cloud/setup-script.sh) and [session-start.sh](templates/cloud/session-start.sh) to `.sandbox/claude-cloud/`, and fill the placeholders from the verify skill's Launch commands: the toolchain in the setup script, the fresh-clone steps in the hook. The setup script installs tools only; anything that reads the clone goes in the hook.
 
 The environment itself is the user's to create on claude.ai/code. Hand them: the setup script to paste, the extra network hosts the script names, and access to `Aysnc-Labs/skills` and this repository.
 
-## 6. Pointers
+## 7. AGENTS.md
 
-Add or update one `## Agent skills` block in `AGENTS.md` (or `CLAUDE.md` when only that exists): one line per `docs/agents/` file, the verify skill, and `CODING_STANDARDS.md`, each saying when to read it. `AGENTS.md` holds pointers and commands; a rule a tool enforces does not belong in it.
+Write `AGENTS.md` from [the template](templates/AGENTS.md) (into `CLAUDE.md` when only that exists), keeping the project's lines that fit it. It loads on every turn, so it holds the gate, commands and conventions nothing enforces, and pointers.
 
-## 7. Report
+Propose a home for every other line: a code map entry (where code lives), a comment or check message where the agent edits (a gotcha or procedure), a `GLOSSARY.md` term, an ADR, a `CODING_STANDARDS.md` rule, a check (a mechanical rule, after which the line goes), or deletion (it restates code, config or a skill). Show the table and move only what the user agrees.
 
-The files written and changed, the feature count and the check's summary line, how the verify skill was proven and what stays unverified, and the cloud steps left to the user.
+Done when every line of the old file is in the new one or has its agreed home.
+
+## 8. Report
+
+The files written and changed, the code map's and the feature map's summary lines, how the verify skill was proven and what stays unverified, and the cloud steps left to the user.

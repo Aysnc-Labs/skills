@@ -50,7 +50,7 @@ Route each surviving lesson to the strongest home it fits, in this order:
 4. **Judgement rule**, read at review: in `code-review`'s `rules/` for a global lesson, else in `CODING_STANDARDS.md`. Covers cross-file consistency, "matches the surrounding style", anything no check could ever substitute for.
 5. **Skill prose**: for a global lesson, and for knowledge no project file can hold. Name the skill and its repository.
 
-Lessons that are not mistakes have fixed homes: a navigation gap gets a navigation pointer in `AGENTS.md` or the doc it belongs to; a gap in driving the app gets a verify skill feature entry; a decision only this project would make gets an ADR in `docs/adr/` (a global one goes into the skills); a term gets an entry in `GLOSSARY.md`.
+Lessons that are not mistakes have fixed homes: a navigation gap gets a `docs/code-map.md` entry; a gap in driving the app gets a verify skill feature entry; a decision only this project would make gets an ADR in `docs/adr/` (a global one goes into the skills); a term gets an entry in `GLOSSARY.md`.
 
 For a type, check or test, the acceptance criterion is "the new check fails on the real past mistake": name the commit, diff or PR it must fail on. When the check replaces a Review rule in `CODING_STANDARDS.md`, the acceptance criterion also moves that rule to its Enforced by tools table, naming the enforcer.
 
@@ -58,7 +58,7 @@ For a type, check or test, the acceptance criterion is "the new check fails on t
 
 Run each and record the real result:
 
-1. The project's checks on the default branch: lint, typecheck, test suites and `check:feature-map` from `AGENTS.md` and `package.json`.
+1. The project's checks on the default branch: lint, typecheck, test suites, the code map and feature map checks, from `AGENTS.md` and `package.json`.
 2. **Test suite**: the e2e test count and run time against the last gardening report. Propose deleting each test a cheaper seam could prove, or another test already covers.
 3. `CODING_STANDARDS.md`: each Review rule that reviews flagged twice in the window is a candidate lint rule; each Enforced by tools row whose enforcer no longer exists is a finding.
 4. `AGENTS.md`: lines that restate the environment, duplicate another doc, or no longer bear on the work.

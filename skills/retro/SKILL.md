@@ -21,7 +21,7 @@ Every candidate cites its **evidence**: a Report, a Verdict finding, a review co
 - **No-ops**: look for instructions in steering files that don't modify the agent's behavior. _Use when_ the steering files are large and unwieldy.
 - **Information access**: look for opportunities to increase the agent's access to information. Teeing dev server logs, readonly access to third-party services. _Use when_ a crucial piece of information was not available to the agent.
 - **Test data**: data agents created for their tests. _Use when_ a shared fixture or helper could provide it.
-- **E2E coverage**: behaviour no automated test covers. _Use when_ a Report lists an Untested behaviour, or review or a Verdict found a bug a test at the ticket's seam would have caught.
+- **Test coverage**: behaviour no automated test covers. _Use when_ a Report lists an Untested behaviour, or review or a Verdict found a bug a test at the ticket's test kind and seam would have caught.
 - **Research gaps**: Implementation notes that were stale or missing. _Use when_ a Report's Research gaps is not `none`.
 - **Struggles**: what agents said took longest or was unclear. _Use when_ it matches a metrics outlier.
 

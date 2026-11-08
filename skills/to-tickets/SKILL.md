@@ -47,7 +47,7 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 - **Blocked by**: which other tickets (if any) must complete first
 - **What it delivers**: the end-to-end behaviour this ticket makes work
 - **Test data**: the data states its tests need (a sold-out product, an editor with no permissions), each a seed case when the project keeps a seed
-- **Verify**: how to prove it works: the automated test at its seam, and the live check on the local environment
+- **Verify**: how to prove it works: the automated test, with its test kind and seam, and the live check on the local environment
 
 Ask the user:
 
@@ -59,7 +59,7 @@ Iterate until the user approves the breakdown.
 
 ### 5. Write each ticket's Implementation notes
 
-Front-load the detail, so the implementer starts building, not researching. Write each approved ticket's slice of the grilling's Research and Code pointers records and the spec's Research section, checking every path against the code. **Implementation notes** hold: the files to change and the patterns to follow, with paths; the test seam and prior-art tests; the data its tests need; risks and overlaps with other tickets; and the **Skills to load**. Stamp them with the commit they were true at (`git rev-parse --short HEAD`). Fill a factual gap from the code yourself; a decision gap goes to the user.
+Front-load the detail, so the implementer starts building, not researching. Write each approved ticket's slice of the grilling's Research and Code pointers records and the spec's Research section, checking every path against the code. **Implementation notes** hold: the files to change and the patterns to follow, with paths; the test kind and seam, and prior-art tests; the data its tests need; risks and overlaps with other tickets; and the **Skills to load**. Stamp them with the commit they were true at (`git rev-parse --short HEAD`). Fill a factual gap from the code yourself; a decision gap goes to the user.
 
 Done when every ticket has Implementation notes and no note says "unknown".
 
@@ -89,9 +89,9 @@ Do NOT close or modify any parent issue.
 
 **Test data:** the data states the tests need, each a seed case when the project keeps a seed.
 
-**Implementation notes** (as of `<sha>`): files and patterns with paths, test seam, data, risks, Skills to load.
+**Implementation notes** (as of `<sha>`): files and patterns with paths, the test kind and seam, data, risks, Skills to load.
 
-**Verify:** the automated test at its seam, and the live check on the local environment.
+**Verify:** the automated test, with its test kind and seam, and the live check on the local environment.
 
 </local-ticket-template>
 
@@ -116,11 +116,11 @@ The data states the tests need, each a seed case when the project keeps a seed.
 
 ## Implementation notes
 
-As of `<sha>`. Files to change and patterns to follow, with paths; the test seam and prior-art tests; data; risks and overlaps with other tickets; **Skills to load**.
+As of `<sha>`. Files to change and patterns to follow, with paths; the test kind and seam, and prior-art tests; data; risks and overlaps with other tickets; **Skills to load**.
 
 ## Verify
 
-- **Automated:** the test at its seam that proves the behaviour.
+- **Automated:** the test that proves the behaviour, with its test kind and seam.
 - **Live:** the check on the local environment: a URL, admin screen or command and its expected result.
 
 ## Blocked by

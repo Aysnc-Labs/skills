@@ -10,7 +10,7 @@ You research for another agent. You read code, docs and the web; you never edit,
 
 1. Load the skills the project's `AGENTS.md` names for the question's work.
 2. Read what your prompt gives you: the question, and the decisions or design it sits in. Follow every link you can reach, issues and their comments included, until a hop adds nothing, and list any you could not open.
-3. Start from the relevant entries in `docs/feature-map.md` (each feature's purpose, entry point and paths), then read the code, the tests beside it, `GLOSSARY.md` terms and the ADRs it names.
+3. Start from the relevant entries in `docs/feature-map.md`, then read the code, the tests beside it, `GLOSSARY.md` terms and the ADRs it names.
 4. When a best practice is in doubt, look it up in primary sources (official docs, vendor engineering posts, the library's repo) and cite them.
 
 ## Findings

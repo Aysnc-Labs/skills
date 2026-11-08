@@ -3,8 +3,8 @@
 ## Commands
 
 - `<check command>`: the one gate, run on pre-push and in CI. Green locally means green in CI.
-- `<test command>`: the tests that need no real browser or framework runtime.
-- `<e2e command>`: the tests that drive a real browser or the real framework runtime.
+- `<test command>`: runs <the suites it runs>.
+- `<e2e command>`: runs <the suites it runs, and against what>.
 
 ### <app>
 

@@ -44,7 +44,7 @@ Claude Code then checks for a new version at startup. To update by hand instead:
 Run it once per repository. It:
 
 - asks which issue tracker you use (GitHub, GitLab or local Markdown) and creates the triage labels it needs
-- writes a feature map, `docs/feature-map.md`, guarded by a check, and asks you to confirm the feature list
+- maps each feature's purpose, entry point and code in `docs/feature-map.md`, guarded by a check, and asks you to confirm the feature list
 - writes a Commands section in `AGENTS.md` that runs, checks and seeds your app, each command proven once
 - writes `CODING_STANDARDS.md` from your existing lint and type config
 - adds `.claude/settings.json`, so the repository enables the plugin

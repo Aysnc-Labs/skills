@@ -60,6 +60,25 @@ test('an entry without an Entry line fails', () => {
   assert.deepEqual(checkFeatureMap(fixture(map), coverage).errors, ['docs/feature-map.md:7 feature "Search" has no Entry: line']);
 });
 
+test('an entry without a Paths line fails, and its modules go uncovered', () => {
+  const map = validMap.replace('Paths: src/search/, scripts/build.ts\n', '');
+  assert.deepEqual(checkFeatureMap(fixture(map), coverage).errors, [
+    'docs/feature-map.md:7 feature "Search" has no Paths: line',
+    'uncovered module: src/search (list it under a feature in docs/feature-map.md)',
+    'uncovered module: scripts/build.ts (list it under a feature in docs/feature-map.md)',
+  ]);
+});
+
+test('an entry with two Entry lines fails', () => {
+  const map = validMap.replace('Paths: src/search/,', 'Entry: the `find` command\nPaths: src/search/,');
+  assert.deepEqual(checkFeatureMap(fixture(map), coverage).errors, ['docs/feature-map.md:10 feature "Search" has a second Entry: line']);
+});
+
+test('an entry with two Paths lines fails', () => {
+  const map = validMap.replace('Decisions:', 'Paths: src/search/\nDecisions:');
+  assert.deepEqual(checkFeatureMap(fixture(map), coverage).errors, ['docs/feature-map.md:11 feature "Search" has a second Paths: line']);
+});
+
 test('an entry with two Purpose lines fails', () => {
   const map = validMap.replace('Entry:', 'Purpose: and another.\nEntry:');
   assert.deepEqual(checkFeatureMap(fixture(map), coverage).errors, ['docs/feature-map.md:9 feature "Search" has a second Purpose: line']);

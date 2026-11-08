@@ -23,7 +23,7 @@ Spend disproportionate effort here. **Be aggressive. Be creative. Refuse to give
 
 ### Ways to construct one, in roughly this order
 
-1. **Failing test** of the lowest test kind that reproduces the bug (the `tdd` skill's Test kinds).
+1. **Failing test** of the lowest test kind that reproduces the bug (`test` before `e2e`; kinds defined in the `aysnc-skills:tdd` skill).
 2. **Curl / HTTP script** against a running dev server.
 3. **CLI invocation** with a fixture input, diffing stdout against a known-good snapshot.
 4. **Headless browser script** (Playwright / Puppeteer) that drives the UI and asserts on DOM/console/network.

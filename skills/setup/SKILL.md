@@ -43,7 +43,7 @@ Agents run, reset and check the app through commands, which step 7 lists in `AGE
 | `status` | each app | says whether the app is up, ready to use, and served from this checkout |
 | `db:reset` | each app | leaves its database empty and migrated |
 | `seed` | each app | loads the data a person needs to use the app |
-| `test` | repo | runs the `test` kind (the `tdd` skill's Test kinds) |
+| `test` | repo | runs the `test` kind: in-process tests through a public interface |
 | `e2e` | repo | runs the `e2e` kind |
 | `check` | repo | the one gate: lint, types, `test`, the map check; pre-push and CI run it |
 

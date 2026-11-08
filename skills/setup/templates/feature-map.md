@@ -5,7 +5,7 @@ Start every task here: find the feature, open its paths, then read the code. The
 A feature is anything a user starts from: an import, a config key, a command or a URL. Code with no entry point of its own belongs to the feature it serves.
 
 - Words: [GLOSSARY.md](../GLOSSARY.md). Decisions: [docs/adr/](adr/). Commands that run and drive the app: `AGENTS.md`.
-- Change this file when a feature is added, removed, renamed or moved, or its purpose or entry point changes. `check-feature-map` verifies it.
+- Change this file when a feature is added, removed, renamed or moved, or its purpose or entry point changes: keeping it current is the editor's job. `check-feature-map` checks that each entry has one Purpose, Entry and Paths line, the listed paths exist, links resolve, and every module is claimed by a feature.
 
 <!-- Keep the Words/Decisions links only while GLOSSARY.md and docs/adr/ exist: the check fails on a dead link. -->
 

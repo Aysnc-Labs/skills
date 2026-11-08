@@ -63,7 +63,7 @@ Done when every surviving lesson has its evidence links, its home and its accept
 Run each and record the real result:
 
 1. The project's checks on the default branch: lint, typecheck, test suites, the feature map check, from `AGENTS.md` and `package.json`.
-2. **Test suite**: the e2e test count and run time against the last gardening report. Propose deleting each test a cheaper test kind could prove, or another test already covers.
+2. **Test suite**: the e2e test count and run time against the last gardening report. Propose deleting each test written above the lowest test kind that proves it, or that another test already covers.
 3. `CODING_STANDARDS.md`: each Review rule that reviews flagged twice in the window is a candidate lint rule; each Enforced by tools row whose enforcer no longer exists is a finding.
 4. `AGENTS.md`: lines that restate the environment, duplicate another doc, or no longer bear on the work. The Commands section, mapping roles to commands and naming where the app is served, stays.
 5. **Project docs**: each ADR, `CODING_STANDARDS.md` rule, `AGENTS.md` line, runbook or other doc that holds a global lesson. Propose moving it into the skills (name the skill and section, or a `code-review` rule) and deleting it from the project. Also each runbook whose steps stay inside the repo: propose a command, a skill or the ticket, and its deletion.

@@ -26,13 +26,13 @@ Every agent picks what to test, and when, by **risk-based testing**. The full te
 
 ## Steps
 
-1. Read the spec and tickets, each body and every comment, and follow their links one hop, to understand the task graph and what has changed since the tickets were written, and load the union of the tickets' **Skills to load**. Read the feature map of the project's verify skill (`.claude/skills/verify-<app>/`) for what each feature does for its users, and the spec's testing decisions: the seams it names are pre-agreed for `tdd`. Foresee the AFK run: ask the user, in one round with your recommended answers, everything only they can give. Post the answers on the spec, and wait for their go.
+1. Read the spec and tickets, each body and every comment, and follow their links one hop, to understand the task graph and what has changed since the tickets were written, and load the union of the tickets' **Skills to load**. Read `docs/feature-map.md` for what each feature does for its users and where it starts, and the spec's testing decisions: the test kinds and seams it names are pre-agreed for `tdd`. Foresee the AFK run: ask the user, in one round with your recommended answers, everything only they can give. Post the answers on the spec, and wait for their go.
 
    Done when every answer is on the spec and the user has said go.
 
 2. Create the integration branch. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge, marked as closing the spec and tickets. Its body, not its comments, is where the AFK user catches up: record each `afk` call there the moment you make it.
 
-3. Brief each implementer with pointers: the ticket, the spec, its lane, the Reports of its merged blockers, any frontier sibling editing the same files, and the skills, AFK and testing paragraphs above. It reads its ticket, the body and every comment, loads its Skills to load, builds the ticket with `tdd`, updates the verify skill's feature file of every feature whose behaviour it adds or changes (a new file for a new feature) and `docs/code-map.md` when it adds, removes, renames or moves a feature, merges the integration branch tip into its own branch before reporting done, and ends on a Report: Built, Tests, Decisions, Untested, Struggles, Research gaps.
+3. Brief each implementer with pointers: the ticket, the spec, its lane, the Reports of its merged blockers, any frontier sibling editing the same files, and the skills, AFK and testing paragraphs above. It reads its ticket, the body and every comment, loads its Skills to load, builds the ticket with `tdd`, updates `docs/feature-map.md` when it adds, removes, renames or moves a feature or changes a feature's purpose or entry point, merges the integration branch tip into its own branch before reporting done, and ends on a Report: Built, Tests, Decisions, Untested, Struggles, Research gaps.
 
    Done when every frontier ticket has an implementer in its own lane.
 

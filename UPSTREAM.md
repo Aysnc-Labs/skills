@@ -25,7 +25,7 @@ Left out: `ask-matt` (Matt's own), `setup-matt-pocock-skills` (replaced by `setu
 | `tdd` | A seam the spec, ticket or `AGENTS.md` names is pre-agreed; in an AFK run the agent picks and records one. The hollow-test anti-pattern. |
 | `to-spec` | A Research section. |
 | `to-tickets` | Per-ticket Implementation notes (stamped with a commit), Test data and Verify sections. |
-| `writing-for-agents` | **Intent**: write the outcome, the bar and why, and leave the method to the agent. |
+| `writing-for-agents` | **Intent**: write the outcome, the bar and why, and leave the method to the agent. An `AGENTS.md` Commands section is no environment cache. |
 
 ## Ours
 

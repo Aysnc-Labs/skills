@@ -2,6 +2,8 @@
 # SessionStart hook (.claude/settings.json) for Claude Code cloud sessions. Prepares a fresh clone in
 # the background so the session starts at once, and only restarts services on a resume, since a cloud
 # VM keeps files but not processes. Does nothing on a laptop.
+# {{what a cloud session does differently from a laptop: what this hook starts, which AGENTS.md
+# commands to run once it is done (db:reset, seed), and services the VM lacks}}
 [ "${CLAUDE_CODE_REMOTE:-}" = true ] || exit 0
 cd "$(dirname "$0")/../.." || exit 0
 

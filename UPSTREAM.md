@@ -30,7 +30,7 @@ Left out: `ask-matt` (Matt's own), `setup-matt-pocock-skills` (replaced by `setu
 
 ## Ours
 
-- `setup`: writes the docs the other skills read, a feature map (`docs/feature-map.md`, each feature's purpose, entry point and paths) guarded by `check-feature-map`, an `AGENTS.md` Commands section with each command proven once, moves `AGENTS.md` sections to their homes, and writes project Claude settings and the cloud scripts.
+- `setup`: writes the docs the other skills read, a feature map (`docs/feature-map.md`) guarded by `check-feature-map`, an `AGENTS.md` Commands section with each command proven once, moves `AGENTS.md` sections to their homes, and writes project Claude settings and the cloud scripts.
 - `afk`: the stance for any run the user is away from: decide as staff engineer and product owner, keep the work moving, and record every call for review. `implement` and `implement-spec` call it.
 - `prove-it`: brings the local stack up through the `AGENTS.md` Commands; a fresh `verifier` tests a PR on it in a real browser and tries to break it; an implementer subagent fixes what it proves with a red test; one `Verdict` comment. Depth is set by risk-based testing and the PR's Merge Danger. In a cloud session, fixes go on the session's branch with a PR into the PR branch.
 - `gardening`: a manual sweep across runs: repeated lessons filed as `needs-triage` issues, health checks, queue tidying, one report issue. Homes: `docs/feature-map.md` for a navigation gap, an `AGENTS.md` Commands command for a gap in running the app. Health checks run the feature map check, hold each test to the lowest test kind, and keep the `AGENTS.md` Commands section.

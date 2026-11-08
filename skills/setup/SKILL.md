@@ -1,12 +1,12 @@
 ---
 name: setup
-description: "Set a repository up for the Aysnc skills: tracker and triage docs, a checked code map, the commands that run and check the app, coding standards, Claude settings and the cloud scripts. Re-run to repair drift."
+description: "Set a repository up for the Aysnc skills: tracker and triage docs, a checked feature map, the commands that run and check the app, coding standards, Claude settings and the cloud scripts. Re-run to repair drift."
 disable-model-invocation: true
 ---
 
 Adopt an existing repository so the other skills work in it, on a laptop and in a Claude Code cloud session. Every file below is one the skills read: none of them guesses where things live.
 
-Explore first: `git remote -v`, `AGENTS.md` and `CLAUDE.md`, `docs/agents/`, `docs/code-map.md`, `GLOSSARY.md`, `docs/adr/`, `.claude/`, `.gitignore`, the package manifest and its check command, the git hooks and the CI workflows. Update what exists in place and keep the project's own additions. Show your findings and a draft of each file, lead each choice with your recommendation, and write only after the user agrees.
+Explore first: `git remote -v`, `AGENTS.md` and `CLAUDE.md`, `docs/agents/`, `docs/feature-map.md` (or an old `docs/code-map.md`), `GLOSSARY.md`, `docs/adr/`, `.claude/`, `.gitignore`, the package manifest and its check command, the git hooks and the CI workflows. Update what exists in place and keep the project's own additions. Show your findings and a draft of each file, lead each choice with your recommendation, and write only after the user agrees.
 
 Every file you write must be tracked: `git check-ignore -v <file>` prints nothing. A **whitelist** `.gitignore` (`/*`, then `!/<entry>`) silently drops a new root file or folder: add its `!` line.
 
@@ -20,18 +20,18 @@ Every file you write must be tracked: `git check-ignore -v <file>` prints nothin
 
 Done when all three files are written and the tracker holds every label `triage-labels.md` names.
 
-## 2. Code map
+## 2. Feature map
 
-`docs/code-map.md` says where each feature's code lives: agents start every task there instead of searching. The feature map says what users see; the code map says where to look.
+`docs/feature-map.md` says what each feature does, where a user enters it and where its code lives: agents start every task there instead of searching.
 
-A **feature** is something a user, developer or operator can name and ask to change, with its own place in the code. A smaller part is a keyword of its parent.
+A **feature** is anything a user starts from: an import, a config key, a command or a URL. Code with no entry point of its own belongs to the feature it serves.
 
 1. Pick the **coverage roots**: the folders whose every child must belong to a feature (packages, apps, source folders; `files` for a folder of scripts). Show them with the draft.
-2. Fan out read-only explorers in parallel, one per coverage root plus one for infrastructure (CI, root config, scripts). Each lists every child of its roots and returns candidate features in the [template](templates/code-map.md)'s entry shape. Merge them into one entry per feature under `## ` areas, and draw who calls whom.
-3. Confirm the feature list with the user: names, grouping, and anything merged, split or left as a keyword. Then write the map.
-4. Copy [check-code-map.ts](templates/scripts/check-code-map.ts) and [its test](templates/scripts/check-code-map.test.ts) beside `check-feature-map`, set `COVERAGE_ROOTS`, and wire both the same way. A failure names the map line or the uncovered module: fix the map, never the script.
+2. Fan out read-only explorers in parallel, one per coverage root plus one for infrastructure (CI, root config, scripts). Each lists every child of its roots and returns candidate features in the [template](templates/feature-map.md)'s entry shape. Merge them into one entry per feature under `## ` areas, and draw who calls whom.
+3. Confirm the feature list with the user: names, grouping, and anything merged into the feature it serves or split. Then write the map (`git mv` an old `docs/code-map.md` to it first, so history follows).
+4. Copy [check-feature-map.ts](templates/scripts/check-feature-map.ts) and [its test](templates/scripts/check-feature-map.test.ts) into the project's scripts folder and set `COVERAGE_ROOTS`. They need Node 22.18 or later (type stripping): check the pinned version. Wire both into the project's one check command, its pre-push hook and CI, the way its other guards are wired, and register them as entry points with the project's dead-code checker (knip and the like) so it counts them as used. A failure names the map line, the feature or the uncovered module: fix the map, and keep the script as shipped.
 
-Done when every coverage-root child is claimed by a feature and the check prints its summary line through the project's check command.
+Done when every coverage-root child is claimed by a feature, every entry holds one Purpose, Entry and Paths line, and the check prints its summary line through the project's check command.
 
 ## 3. Commands
 

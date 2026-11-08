@@ -23,9 +23,21 @@ A **seam** is the public boundary you test at: the interface where you observe b
 
 Ask: "What's the public interface, and which seams should we test?" Give each proposed seam a one-line note on what it catches and what it misses.
 
-A seam the spec or ticket already names (a "Testing Decisions" section, a seam the project's `AGENTS.md` defines) is pre-agreed: write it down and start. Ask only about a seam nothing names. In an AFK run nobody answers, so pick the highest existing seam that shows the behaviour and record the choice in your Report.
+A seam the spec or ticket already names (a "Testing Decisions" section, a ticket's Verify line) is pre-agreed: write it down and start. Ask only about a seam nothing names. In an AFK run nobody answers, so pick the lowest test kind that proves the behaviour and the highest existing seam within it (see Test kinds), and record the choice in your Report.
 
 When the shape of that interface is itself in question (how deep the module is, where the seam belongs, what the interface should expose), call the Skill tool with "codebase-design" for the vocabulary. It is the shared source of the module, interface, depth, seam, adapter, leverage and locality terms, and it is a reference to consult, not a session to run.
+
+## Test kinds
+
+Every test is one of three **kinds**, each run by its own command in the project's `AGENTS.md`:
+
+- **`test`**: through a public interface, in process. The default.
+- **`e2e`**: only what a real browser or the real framework runtime shows (rendering, routing, a request through the real server).
+- **`check`**: the gate's own rules (a lint rule, a checker), proven by a fixture that breaks the rule on purpose.
+
+**Lowest kind, then highest seam.** Kind and seam are two separate axes, chosen in that order. First the kind: the lowest that proves the behaviour, so `test` unless only a browser or the framework runtime can show it. Then the seam, within that kind: the highest public interface that shows the behaviour, so the test survives refactors beneath it. A `test` at a package's public entry is both at once: low on kind, high on seam.
+
+**Speed is the reason.** Agents copy the nearest test. One `e2e` test where a `test` would do becomes the pattern every later agent follows, and the suite slows with each copy. Keep each test inside the project's speed budget when it sets one.
 
 ## Anti-patterns
 

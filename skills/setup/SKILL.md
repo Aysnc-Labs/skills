@@ -1,6 +1,6 @@
 ---
 name: setup
-description: "Set a repository up for the Aysnc skills: tracker and triage docs, a checked code map, a verification skill with a checked feature map, coding standards, Claude settings and the cloud scripts. Re-run to repair drift."
+description: "Set a repository up for the Aysnc skills: tracker and triage docs, a checked code map, the commands that run and check the app, coding standards, Claude settings and the cloud scripts. Re-run to repair drift."
 disable-model-invocation: true
 ---
 
@@ -20,20 +20,7 @@ Every file you write must be tracked: `git check-ignore -v <file>` prints nothin
 
 Done when all three files are written and the tracker holds every label `triage-labels.md` names.
 
-## 2. Verification skill
-
-Read `../create-verification-skill/SKILL.md` and follow it. It writes `.claude/skills/verify-<app>/`: how to launch, check, drive and clean up the app, plus its feature map. `prove-it`, `grill-with-docs`, `implement-spec` and any agent in the repo lean on it.
-
-Its Launch section also covers a Claude Code cloud session (`CLAUDE_CODE_REMOTE=true`): what step 5's hook already started, where its log is, and what differs from a laptop. Mark what you could not run here as unverified, as that skill's step 4 says for a stand-in.
-
-Then guard the feature map:
-
-1. Copy [check-feature-map.ts](templates/scripts/check-feature-map.ts) and [its test](templates/scripts/check-feature-map.test.ts) into the project's scripts folder. They need Node 22.18 or later (type stripping): check the pinned version. The check holds every `verify-*` map to the feature entry contract and fails on a feature file that names a repo path: the map names what users touch, and an agent finds code by searching.
-2. Wire both into the project's one check command, its pre-push hook and CI, the way its other guards are wired. Register the verify skill's helper scripts as entry points with the project's dead-code checker (knip and the like), or it reports them as unused.
-
-Done when the generated skill is proven end to end as `create-verification-skill` requires, and the check prints its summary line and its test passes through the project's check command.
-
-## 3. Code map
+## 2. Code map
 
 `docs/code-map.md` says where each feature's code lives: agents start every task there instead of searching. The feature map says what users see; the code map says where to look.
 
@@ -46,6 +33,27 @@ A **feature** is something a user, developer or operator can name and ask to cha
 
 Done when every coverage-root child is claimed by a feature and the check prints its summary line through the project's check command.
 
+## 3. Commands
+
+Agents run, reset and check the app through commands, which step 7 lists in `AGENTS.md`'s Commands for every skill to read. Each role gets one:
+
+| Role | Scope | Does |
+|---|---|---|
+| `dev` | each app | serves the app and prints where (URL, port or socket) |
+| `status` | each app | says whether the app is up, ready to use, and served from this checkout |
+| `db:reset` | each app | leaves its database empty and migrated |
+| `seed` | each app | loads the data a person needs to use the app |
+| `test` | repo | the tests that need no real browser or framework runtime |
+| `e2e` | repo | the tests that drive a real browser or the real framework runtime |
+| `check` | repo | the one gate: lint, types, `test`, the map check; pre-push and CI run it |
+
+1. Find each role's command in the manifest (package scripts, Makefile, justfile). Where none fits, write one there; past one line, as a script in the project's scripts folder. Leave out a role the app has no use for (no database, no `db:reset`), and say why in the draft.
+2. Make `status` tell this checkout's instance from another's: a second clone or worktree can serve the same app. Have it compare something only this checkout holds, such as the server process's working directory or a marker `dev` writes into the checkout. Ready means usable: a page renders or a query answers, beyond a port accepting connections.
+3. Prove each command once from a fresh clone in a temporary folder, in the order a newcomer runs them: install, `db:reset`, `seed`, `dev`, `status`, `test`, `e2e`, `check`. The clone lacks your untracked files (`.env`, build output), which is the point: a command that needs one creates it or names it. Stop what you started. A command never run is a draft: fix it until it runs.
+4. On a stand-in for the real target (a laptop standing in for a cloud session, a container without the real database), list what stays unverified.
+
+Done when every role has a command that ran from a fresh clone, is left out with its reason, or is listed as unverified.
+
 ## 4. Coding standards
 
 Write `CODING_STANDARDS.md` from [the template](templates/CODING_STANDARDS.md). Fill "Enforced by tools" from the lint, type and check configuration, and "Review rules" only with judgement calls the project already holds (in `AGENTS.md`, docs or review history).
@@ -56,7 +64,7 @@ Done when every review rule cites its source and every enforced row names its en
 
 Merge [claude-settings.json](templates/claude-settings.json) into `.claude/settings.json`: add missing keys and entries, keep every project key in its order. A `!` rule exempts paths only from the rules before it in the same file: keep each after the rule it carves out.
 
-- `autoMemoryEnabled: false`: what agents learn goes in the repository (`docs/agents/`, the verify skill, `CODING_STANDARDS.md`, issue bodies), where every agent and person reads it, not in one machine's memory folder.
+- `autoMemoryEnabled: false`: what agents learn goes in the repository (`docs/agents/`, `docs/feature-map.md`, `CODING_STANDARDS.md`, issue bodies), where every agent and person reads it, not in one machine's memory folder.
 - `enabledPlugins` and `extraKnownMarketplaces` name the plugin but download nothing: each person runs `claude plugin install aysnc-skills@aysnc --scope project` once.
 - The `Read` denies cover Claude's file tools, not `cat` in a shell. The push denies match a command as written, so `git -C . push` slips past: they catch accidents. Branch protection on the forge is what stops a push: offer a rule or ruleset requiring a PR.
 - Set `main` in the push denies to the default branch.
@@ -65,7 +73,7 @@ Done when `.claude/settings.json` holds every template key and entry and every p
 
 ## 6. Cloud
 
-Copy [setup-script.sh](templates/cloud/setup-script.sh) and [session-start.sh](templates/cloud/session-start.sh) to `.sandbox/claude-cloud/`, and fill the placeholders from the verify skill's Launch commands: the toolchain in the setup script, the fresh-clone steps in the hook. The setup script installs tools only; anything that reads the clone goes in the hook.
+Copy [setup-script.sh](templates/cloud/setup-script.sh) and [session-start.sh](templates/cloud/session-start.sh) to `.sandbox/claude-cloud/`, and fill the placeholders from step 3's commands: the toolchain in the setup script, the fresh-clone steps and the services to restart in the hook. The setup script installs tools only; anything that reads the clone goes in the hook. Write what a cloud session does differently from a laptop in the hook's comments.
 
 The environment is the user's to create on claude.ai/code. Hand them the setup script to paste and the extra network hosts it names.
 
@@ -75,7 +83,7 @@ Done when neither script has a `{{` placeholder left.
 
 Write `AGENTS.md` from [the template](templates/AGENTS.md) (into `CLAUDE.md` when only that exists), keeping the project's lines that fit it. It loads on every turn, so it holds only the gate, commands and conventions nothing enforces, and pointers.
 
-Propose a home for every other line: a code map entry (where code lives), a comment or check message where the agent edits (a gotcha or procedure), a `GLOSSARY.md` term, an ADR, a `CODING_STANDARDS.md` rule, a check (a mechanical rule; the line then goes), or deletion (it restates code, config or a skill). Show the table and move only what the user agrees.
+Propose a home for every other line: a feature map entry (where code lives), a command (a way to run, reset or check the app), a comment or check message where the agent edits (a gotcha or procedure), a `GLOSSARY.md` term, an ADR, a `CODING_STANDARDS.md` rule, a check (a mechanical rule; the line then goes), or deletion (it restates code, config or a skill). Show the table and move only what the user agrees.
 
 Done when every line of the old file is in the new one or has its agreed home.
 
@@ -84,8 +92,7 @@ Done when every line of the old file is in the new one or has its agreed home.
 ```markdown
 - Written: <files>
 - Changed: <files>
-- Code map: <check summary line>
 - Feature map: <check summary line>
-- Verify skill: proven by <how>; unverified: <what, or none>
+- Commands: proven by <how>; unverified: <what, or none>
 - Left to you: <cloud steps>
 ```

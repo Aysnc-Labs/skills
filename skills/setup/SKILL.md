@@ -43,8 +43,8 @@ Agents run, reset and check the app through commands, which step 7 lists in `AGE
 | `status` | each app | says whether the app is up, ready to use, and served from this checkout |
 | `db:reset` | each app | leaves its database empty and migrated |
 | `seed` | each app | loads the data a person needs to use the app |
-| `test` | repo | the tests that need no real browser or framework runtime |
-| `e2e` | repo | the tests that drive a real browser or the real framework runtime |
+| `test` | repo | runs the `test` kind (the `tdd` skill's Test kinds) |
+| `e2e` | repo | runs the `e2e` kind |
 | `check` | repo | the one gate: lint, types, `test`, the map check; pre-push and CI run it |
 
 1. Find each role's command in the manifest (package scripts, Makefile, justfile). Where none fits, write one there; past one line, as a script in the project's scripts folder. Leave out a role the app has no use for (no database, no `db:reset`), and say why in the draft.

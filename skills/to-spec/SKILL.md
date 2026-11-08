@@ -12,7 +12,7 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 
 1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching.
 
-2. Sketch out how you're going to test the feature. For each behaviour, pick the lowest test kind that proves it (`test` in process by default, `e2e` only for what a real browser or the framework runtime shows, `check` for the gate's own rules), then the seam within that kind. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
+2. Sketch out how you're going to test the feature. For each behaviour, pick the lowest test kind that proves it (the `tdd` skill's Test kinds), then the seam within that kind. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
 
 Check with the user that these test kinds and seams match their expectations.
 

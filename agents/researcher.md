@@ -19,7 +19,7 @@ Answer the question you were given first. For an area of a design, cover:
 
 - **Skills to load**: each with the reason it applies.
 - **Where**: the files to change and the existing patterns to follow, with paths and the commit they were true at (`git rev-parse --short HEAD`).
-- **Test seam**: the highest existing seam to test at, and prior-art tests to copy.
+- **Test kind and seam**: the lowest test kind that proves the behaviour (`test`, `e2e` or `check`), the highest existing seam within it, and prior-art tests to copy.
 - **Data**: the data the tests need, and how to create it.
 - **Risks**: shared contracts, migrations, files other work touches.
 - **Best practice**: each lookup with its source URL.

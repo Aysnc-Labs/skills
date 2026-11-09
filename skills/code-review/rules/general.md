@@ -38,6 +38,12 @@ When code behaves differently depending on the data, the change adds a seed case
 
 ## 7. Long-standing docs name no specs or tickets
 
-A spec or ticket is finished work; `AGENTS.md`, `CLAUDE.md`, READMEs, the code map, skills and code comments outlive it, and an agent that follows the reference reads stale context. Say the fact itself. The issue tracker doc, whose job is the tracker, is the exception.
+A spec or ticket is finished work; `AGENTS.md`, `CLAUDE.md`, READMEs, the feature map, skills and code comments outlive it, and an agent that follows the reference reads stale context. Say the fact itself. The issue tracker doc, whose job is the tracker, is the exception.
 
 **Breach:** a spec, ticket or plan-issue reference (a number, an `[NN-MM]` id, "lands in spec 3") in one of those files.
+
+## 8. Each test at the lowest kind that proves it
+
+A test is one of three kinds: `test` (through a public interface, in process), `e2e` (a real browser or the real framework runtime) or `check` (the gate's own rules, proven by a fixture that breaks one). Each test is the lowest kind that proves its behaviour, so `e2e` holds only what a browser or the framework runtime alone shows. Agents copy the nearest test, so one slow test becomes the pattern for every later one.
+
+**Breach:** a new `e2e` test whose behaviour a `test` could prove, or a test over the project's speed budget when it sets one.

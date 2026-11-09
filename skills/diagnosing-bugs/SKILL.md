@@ -23,7 +23,7 @@ Spend disproportionate effort here. **Be aggressive. Be creative. Refuse to give
 
 ### Ways to construct one, in roughly this order
 
-1. **Failing test** at whatever seam reaches the bug: unit, integration, e2e.
+1. **Failing test** of the lowest test kind that reproduces the bug (`test` before `e2e`; kinds defined in the `aysnc-skills:tdd` skill).
 2. **Curl / HTTP script** against a running dev server.
 3. **CLI invocation** with a fixture input, diffing stdout against a known-good snapshot.
 4. **Headless browser script** (Playwright / Puppeteer) that drives the UI and asserts on DOM/console/network.
@@ -119,6 +119,8 @@ Write the regression test **before the fix**, but only if there is a **correct s
 
 A correct seam is one where the test exercises the **real bug pattern** as it occurs at the call site. If the only available seam is too shallow (single-caller test when the bug needs multiple callers, unit test that can't replicate the chain that triggered the bug), a regression test there gives false confidence.
 
+Within that rule, pick the lowest test kind that reproduces the bug at a correct seam. The correct seam wins: when only an `e2e` reaches the real bug pattern, the regression test is an `e2e`.
+
 **If no correct seam exists, that itself is the finding.** Note it. The codebase architecture is preventing the bug from being locked down. Flag this for the next phase.
 
 If a correct seam exists:
@@ -129,7 +131,7 @@ If a correct seam exists:
 4. Watch it pass.
 5. Re-run the Phase 1 feedback loop against the original (un-minimised) scenario.
 
-When the bug is **data-shaped** (its cause is the shape of data) and the project keeps a seed (named in the verify skill's feature map), add the seed case it missed beside the regression test, so every fresh instance shows it.
+When the bug is **data-shaped** (its cause is the shape of data) and the project keeps a seed (its `AGENTS.md` names a `seed` command), add the seed case it missed to the data that command loads, beside the regression test, so every fresh instance shows it.
 
 ## Phase 6: Cleanup
 

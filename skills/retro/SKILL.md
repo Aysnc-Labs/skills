@@ -21,7 +21,7 @@ Every candidate cites its **evidence**: a Report, a Verdict finding, a review co
 - **No-ops**: look for instructions in steering files that don't modify the agent's behavior. _Use when_ the steering files are large and unwieldy.
 - **Information access**: look for opportunities to increase the agent's access to information. Teeing dev server logs, readonly access to third-party services. _Use when_ a crucial piece of information was not available to the agent.
 - **Test data**: data agents created for their tests. _Use when_ a shared fixture or helper could provide it.
-- **E2E coverage**: behaviour no automated test covers. _Use when_ a Report lists an Untested behaviour, or review or a Verdict found a bug a test at the ticket's seam would have caught.
+- **Test coverage**: behaviour no automated test covers. _Use when_ a Report lists an Untested behaviour, or review or a Verdict found a bug a test at the ticket's test kind and seam would have caught.
 - **Research gaps**: Implementation notes that were stale or missing. _Use when_ a Report's Research gaps is not `none`.
 - **Struggles**: what agents said took longest or was unclear. _Use when_ it matches a metrics outlier.
 
@@ -47,8 +47,8 @@ You have access to several files in the repo:
 
 - `CLAUDE.md`/`AGENTS.md`: these files are pushed to the context window of any agent working in this repo. They should be used incredibly sparingly, usually only for **navigation pointers** to other files.
 - `CODING_STANDARDS.md`: this file is read during review, not implementation. Add **navigation pointers** to docs folders if the standards file gets more than 1,000 lines long.
-- `docs/code-map.md`: where each feature's code lives; the home for navigation lessons.
-- The verify skill's feature map (`.claude/skills/verify-<app>/features/`): what each feature does for its users and how to drive it; the home for lessons about driving the app.
+- `docs/feature-map.md`: the home for navigation lessons.
+- `AGENTS.md`'s Commands: how to run, check and seed the app; the home for lessons about running it, as a fixed or new command.
 - `GLOSSARY.md` and `docs/adr/`: the domain terms and the decisions, kept by the `domain-modeling` skill.
 - Docs: use docs as references files, pointed to by other files. Look for existing docs before writing new ones.
 - Skills: use skills for docs (since their description goes into the agent's context window), or for user-invoked commands. Follow the advice in the `writing-for-agents` skill.

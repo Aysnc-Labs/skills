@@ -52,7 +52,7 @@ Route each surviving lesson to the strongest home it fits, in this order:
 4. **Judgement rule**, read at review: in `code-review`'s `rules/` for a global lesson, else in `CODING_STANDARDS.md`. Covers cross-file consistency, "matches the surrounding style", anything no check could ever substitute for.
 5. **Skill prose**: for a global lesson, and for knowledge no project file can hold. Name the skill and its repository.
 
-Lessons that are not mistakes have fixed homes: a navigation gap gets a `docs/code-map.md` entry; a gap in driving the app gets a verify skill feature entry; a decision only this project would make gets an ADR in `docs/adr/` (a global one goes into the skills); a term gets an entry in `GLOSSARY.md`.
+Lessons that are not mistakes have fixed homes: a navigation gap gets a `docs/feature-map.md` entry; a gap in running the app gets a fixed or new command in `AGENTS.md`'s Commands; a decision only this project would make gets an ADR in `docs/adr/` (a global one goes into the skills); a term gets an entry in `GLOSSARY.md`.
 
 For a type, check or test, the acceptance criterion is "the new check fails on the real past mistake": name the commit, diff or PR it must fail on. When the check replaces a Review rule in `CODING_STANDARDS.md`, the acceptance criterion also moves that rule to its Enforced by tools table, naming the enforcer.
 
@@ -62,10 +62,10 @@ Done when every surviving lesson has its evidence links, its home and its accept
 
 Run each and record the real result:
 
-1. The project's checks on the default branch: lint, typecheck, test suites, the code map and feature map checks, from `AGENTS.md` and `package.json`.
-2. **Test suite**: the e2e test count and run time against the last gardening report. Propose deleting each test a cheaper seam could prove, or another test already covers.
+1. The project's checks on the default branch: lint, typecheck, test suites, the feature map check, from `AGENTS.md` and `package.json`.
+2. **Test suite**: the e2e test count and run time against the last gardening report. Propose moving each test written above the lowest test kind that proves it down to that kind (rewrite it there, then delete the slow one), and deleting each test another test already covers.
 3. `CODING_STANDARDS.md`: each Review rule that reviews flagged twice in the window is a candidate lint rule; each Enforced by tools row whose enforcer no longer exists is a finding.
-4. `AGENTS.md`: lines that restate the environment, duplicate another doc, or no longer bear on the work.
+4. `AGENTS.md`: lines that restate the environment, duplicate another doc, or no longer bear on the work. The Commands section, mapping roles to commands and naming where the app is served, stays.
 5. **Project docs**: each ADR, `CODING_STANDARDS.md` rule, `AGENTS.md` line, runbook or other doc that holds a global lesson. Propose moving it into the skills (name the skill and section, or a `code-review` rule) and deleting it from the project. Also each runbook whose steps stay inside the repo: propose a command, a skill or the ticket, and its deletion.
 
 A failing check is a finding with its output as evidence.

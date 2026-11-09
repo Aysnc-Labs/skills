@@ -23,20 +23,20 @@ Only what the PR changed: the **changed surface**, every page, admin screen and 
 
 1. **Pin the PR.** Read it with `gh pr view <n> --comments`: its branch, body and linked issues.
    - The local stack serves the main checkout. When `git status` there shows uncommitted changes, work in a fresh worktree of the PR branch instead, and leave the main checkout untouched.
-   - Otherwise note the current branch, check out the PR branch and pull it, then bring the stack onto it with the project's verify skill (`.claude/skills/verify-<app>/`): its Launch and Doctor, plus installs and migrations.
-   - Prove the stack serves the PR: request something only the PR's code produces. If it does not, restart the dev servers and check again; if it still does not, stop and tell the user.
+   - Otherwise note the current branch, check out the PR branch and pull it, then bring the stack onto it with the Commands in the project's `AGENTS.md`: installs and migrations, then each app's `dev`. Note every process you start.
+   - Run each app's `status`: it must say the app is up, ready and served from this checkout. Then prove the stack serves the PR: request something only the PR's code produces. If either fails, restart the dev servers and check again; if it still fails, stop and tell the user.
 
-   Done when a request only the PR's code can answer comes back from the local stack.
+   Done when `status` passes for each app and a request only the PR's code can answer comes back from the local stack.
 
 2. **Checklist.** The project's `docs/agents/verification.md`. When it is missing, copy [verification.md](verification.md) there, commit it to the PR branch, and say so in For Human.
 
    Done when the checklist exists at that path on the PR branch.
 
-3. **Verification steps.** When the PR body has no Verification section, write one from the diff, the linked issues and the verify skill's feature files for the behaviour the diff touches, with the `pr` skill's Verification format: every behaviour the PR changed. Say in For Human that you wrote it.
+3. **Verification steps.** When the PR body has no Verification section, write one from the diff, the linked issues and the `docs/feature-map.md` entries whose Paths the diff touches, each driven from its Entry line, with the `pr` skill's Verification format: every behaviour the PR changed. Say in For Human that you wrote it.
 
    Done when the PR body's Verification section covers every behaviour the diff changed.
 
-4. **Test.** Start one fresh verifier, briefed with pointers only: the PR URL, the local site URL, the verify skill's path, the checklist path, the screenshot folder (`${TMPDIR:-/tmp}/prove-it/<PR number>/round-<n>/`) and, after the first round, the last verified commit. Done when it has returned `PASS`, `ISSUES` or `BLOCKED` with its method and evidence; rerun it once if it returns without them.
+4. **Test.** Start one fresh verifier, briefed with pointers only: the PR URL, the local site URL, the checklist path, the screenshot folder (`${TMPDIR:-/tmp}/prove-it/<PR number>/round-<n>/`) and, after the first round, the last verified commit. Done when it has returned `PASS`, `ISSUES` or `BLOCKED` with its method and evidence; rerun it once if it returns without them.
 
 5. **Fix.** You design each fix, as a staff engineer: the verifier proves damage, and its fix direction is one input. Brief the implementer with the simplest design that closes the damage at its cause, in proportion to what the damage costs.
 
@@ -60,9 +60,9 @@ Only what the PR changed: the **changed surface**, every page, admin screen and 
 
    Done when the Verdict and For Human reflect the last round.
 
-7. **Restore.** Run the verify skill's Cleanup, delete the data the run created, and check the user's original branch back out with the stack on it, or remove the worktree.
+7. **Restore.** Stop the processes the run started, delete the data the run created, and check the user's original branch back out with the stack on it, or remove the worktree. The user's local data stays: cleanup deletes record by record, never with `db:reset`.
 
-   Done when `git status` in the main checkout matches how you found it and no run data remains but the screenshots.
+   Done when `git status` in the main checkout matches how you found it, every process the run started is stopped, and no run data remains but the screenshots.
 
 8. **Show.** End the run on the **Wrap-up** below, with every screenshot from every round.
 

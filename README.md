@@ -44,8 +44,8 @@ Claude Code then checks for a new version at startup. To update by hand instead:
 Run it once per repository. It:
 
 - asks which issue tracker you use (GitHub, GitLab or local Markdown) and creates the triage labels it needs
-- maps where each feature's code lives in `docs/code-map.md`, and asks you to confirm the feature list
-- generates a verify skill that launches and drives your app, with a feature map
+- maps each feature's purpose, entry point and code in `docs/feature-map.md`, guarded by a check, and asks you to confirm the feature list
+- writes a Commands section in `AGENTS.md` that runs, checks and seeds your app, each command proven once
 - writes `CODING_STANDARDS.md` from your existing lint and type config
 - adds `.claude/settings.json`, so the repository enables the plugin
 - writes the scripts for Claude Code on the web
@@ -95,15 +95,13 @@ All skills use the `aysnc-skills:` prefix, for example `/aysnc-skills:tdd`.
 </details>
 
 <details>
-<summary><b>Verify and ship</b> · prove-it, code-review, pr, create-verification-skill, maintain-verification-skill</summary>
+<summary><b>Verify and ship</b> · prove-it, code-review, pr</summary>
 
 | Skill | What it does |
 |---|---|
 | `prove-it` | Tests a PR like a careful human, fixes what breaks, and posts one Verdict. |
 | `code-review` | Reviews against your standards *and* the original spec, in parallel. |
 | `pr` | Writes PR bodies with For Human, Verification steps and a ticket table. |
-| `create-verification-skill` | Generates a skill that drives your app the way a user does. |
-| `maintain-verification-skill` | Keeps that skill honest as your app changes. |
 
 </details>
 
@@ -156,7 +154,7 @@ All skills use the `aysnc-skills:` prefix, for example `/aysnc-skills:tdd`.
 
 ## Credits
 
-Built on [Matt Pocock's skills](https://github.com/mattpocock/skills), with verification skills from Lauren Tan's [pstack](https://github.com/cursor/plugins/tree/main/pstack) and PR visuals adapted from Dex Horthy's [`show-me`](https://github.com/humanlayer/humanlayer). Every change we made to upstream is listed in [UPSTREAM.md](UPSTREAM.md).
+Built on [Matt Pocock's skills](https://github.com/mattpocock/skills), with `in-your-own-words` from Lauren Tan's [pstack](https://github.com/cursor/plugins/tree/main/pstack) and PR visuals adapted from Dex Horthy's [`show-me`](https://github.com/humanlayer/humanlayer). Every change we made to upstream is listed in [UPSTREAM.md](UPSTREAM.md).
 
 ## Contributing
 

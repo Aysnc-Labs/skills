@@ -26,6 +26,7 @@ Left out: `ask-matt` (Matt's own), `setup-matt-pocock-skills` (replaced by `setu
 | `to-spec` | A Research section. Testing decisions pick a test kind, then a seam. |
 | `to-tickets` | Per-ticket Implementation notes (stamped with a commit), Test data and Verify sections, each test named by its test kind and seam. |
 | `triage` | Explores from the feature map; reproduces a bug through the `AGENTS.md` Commands. |
+| `wayfinder` | A ticket's branches (research findings, prototypes) are named `wayfinder/<map#>/<ticket#>-<slug>`. |
 | `writing-for-agents` | **Intent**: write the outcome, the bar and why, and leave the method to the agent. An `AGENTS.md` Commands section is no environment cache. |
 
 ## Ours

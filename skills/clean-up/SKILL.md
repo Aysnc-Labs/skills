@@ -8,7 +8,7 @@ Erase this chat's **footprint**: everything it created or changed, in the main t
 
 ## 1. Inventory
 
-Walk the whole conversation and list the footprint: worktrees, branches (local and remote), databases and seed data, containers, processes and ports, scratch files, installed packages, changed config. A created thing is removed; a changed thing is reverted to its original. Anything that predates the chat stays. Note the branch and working-tree state the chat started on.
+Walk the whole conversation and list the footprint: worktrees, branches (local and remote), databases and seed data, containers and `sbx` sandboxes, processes and ports, scratch files, installed packages, changed config. A created thing is removed; a changed thing is reverted to its original. Anything that predates the chat stays. Note the branch and working-tree state the chat started on.
 
 Done when every item is listed, checked to still exist, with how to remove or revert it.
 

@@ -12,7 +12,7 @@ Before building, ask the user every open question the spec or tickets leave, one
 
 Call the Skill tool with "tdd" where possible, at pre-agreed seams.
 
-Run typechecking regularly, single test files regularly, and the full test suite once at the end.
+Call the Skill tool with `aysnc-skills:engineering` before you build, and prove your work its way.
 
 Once done, call the Skill tool with "code-review" to review the work (`aysnc-skills:code-review` in Claude Code, whose built-in `code-review` shares the name).
 

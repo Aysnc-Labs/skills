@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 Test a PR as a careful human tester would, so nobody has to. CI runs the lint, type, unit and e2e suites; you do the hands-on part they miss: drive the change in a real browser and try to break it. This is the last check before a change costs the business sales, trust or search ranking.
 
-The PR waits on you: go as fast as **risk-based testing** allows, with the PR's Merge Danger setting the depth.
+Call the Skill tool with `aysnc-skills:engineering` before you start. The PR waits on you: go as fast as engineering's risk-based testing allows, with the PR's Merge Danger setting the depth.
 
 The result comes from a **verifier** (`aysnc-skills:verifier`) that did not write the code. Fixes come from an implementer subagent. No agent grades its own work. The verifier's rules (a gap is not a pass, evidence and damage for every finding) live in its agent file.
 
@@ -28,9 +28,9 @@ Only what the PR changed: the **changed surface**, every page, admin screen and 
 
    Done when `status` passes for each app and a request only the PR's code can answer comes back from the local stack.
 
-2. **Checklist.** The project's `docs/agents/verification.md`. When it is missing, copy [verification.md](verification.md) there, commit it to the PR branch, and say so in For Human.
+2. **Checklist.** The project's `docs/agents/verification.md`: its Access and its checklist. When it is missing, copy [verification.md](verification.md) there, commit it to the PR branch, and say so in For Human; an Access left as placeholders goes in For Human too.
 
-   Done when the checklist exists at that path on the PR branch.
+   Done when the file exists at that path on the PR branch, and every Access placeholder is filled or named in For Human.
 
 3. **Verification steps.** When the PR body has no Verification section, write one from the diff, the linked issues and the `docs/feature-map.md` entries whose Paths the diff touches, each driven from its Entry line, with the `pr` skill's Verification format: every behaviour the PR changed. Say in For Human that you wrote it.
 

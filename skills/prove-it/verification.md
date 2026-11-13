@@ -1,4 +1,13 @@
-# Verification checklist
+# Verification
+
+## Access
+
+How an agent gets into the app with nobody there.
+
+- <role>: <seeded user, and how an agent logs in as it, past any 2FA, captcha or emailed link>
+- <test cards, sandbox keys or other credentials an agent may use, or where they live>
+
+## Checklist
 
 Areas a careful human tester keeps in mind when testing a change on this project. The `aysnc-skills:prove-it` skill's verifier weighs each one against the changed surface and tests the ones that apply. Add your project's own risks.
 

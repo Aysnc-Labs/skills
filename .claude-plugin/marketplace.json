@@ -7,7 +7,7 @@
       "name": "aysnc-skills",
       "source": "./",
       "description": "Spec to tickets to an AFK implementation, a PR that says what needs you, and a verdict from an agent that did not write the code. Built on Matt Pocock's skills.",
-      "version": "1.2.2"
+      "version": "1.3.0"
     }
   ]
 }

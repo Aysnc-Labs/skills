@@ -83,10 +83,12 @@ All skills use the `aysnc-skills:` prefix, for example `/aysnc-skills:tdd`.
 </details>
 
 <details>
-<summary><b>Build</b> · implement-spec, implement, tdd, diagnosing-bugs, afk</summary>
+<summary><b>Build</b> · engineering, docker-sandbox, implement-spec, implement, tdd, diagnosing-bugs, afk</summary>
 
 | Skill | What it does |
 |---|---|
+| `engineering` | How we engineer: simple, ergonomic, learnings in the project, and the cheapest proof (narrowest check, local machine, `sbx` for Linux, `agent-browser`). Every implementation skill requires it. |
+| `docker-sandbox` | How to work with Docker Sandboxes (`sbx`): clone mode, cleanup, the gotchas. |
 | `implement-spec` | Builds a spec's tickets AFK: one lane per ticket, one integration branch, one draft PR. |
 | `implement` | Builds a smaller piece of work. |
 | `tdd` | Red, green, refactor, through public seams. |
@@ -128,11 +130,10 @@ All skills use the `aysnc-skills:` prefix, for example `/aysnc-skills:tdd`.
 </details>
 
 <details>
-<summary><b>Utilities</b> · aysnc, setup, clean-up, handoff, wizard, teach, writing-for-agents, pocock-this, in-your-own-words, wait-what</summary>
+<summary><b>Utilities</b> · setup, clean-up, handoff, wizard, teach, writing-for-agents, pocock-this, in-your-own-words, wait-what</summary>
 
 | Skill | What it does |
 |---|---|
-| `aysnc` | Our working principles: simple, ergonomic, learnings in the project. A hook loads it in every session and subagent. |
 | `setup` | Gets a repository ready for everything above. |
 | `clean-up` | Removes everything a chat created (worktrees, branches, databases) after you confirm. |
 | `handoff` | Compacts the conversation into a doc another agent can pick up. |

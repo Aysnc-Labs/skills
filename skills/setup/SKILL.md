@@ -50,9 +50,10 @@ Agents run, reset and check the app through commands, which step 7 lists in `AGE
 1. Find each role's command in the manifest (package scripts, Makefile, justfile). Where none fits, write one there; past one line, as a script in the project's scripts folder. Leave out a role the app has no use for (no database, no `db:reset`), and say why in the draft.
 2. Make `status` tell this checkout's instance from another's: a second clone or worktree can serve the same app. Have it compare something only this checkout holds, such as the server process's working directory or a marker `dev` writes into the checkout. Ready means usable: a page renders or a query answers, beyond a port accepting connections.
 3. Prove each command once from a fresh clone in a temporary folder, in the order a newcomer runs them: install, `db:reset`, `seed`, `dev`, `status`, `test`, `e2e`, `check`. The clone lacks your untracked files (`.env`, build output), which is the point: a command that needs one creates it or names it. Stop what you started. A command never run is a draft: fix it until it runs.
-4. On a stand-in for the real target (a laptop standing in for a cloud session, a container without the real database), list what stays unverified.
+4. **Access**: agents prove the app with nobody there. Ask the user for a seeded user per role, a login path an agent can drive alone (past any 2FA, captcha or emailed link) and any test credentials, proposing one where none exists. Write `docs/agents/verification.md` from [prove-it's template](../prove-it/verification.md) with that Access filled, keeping a project copy's own checklist lines.
+5. On a stand-in for the real target (a laptop standing in for a cloud session, a container without the real database), list what stays unverified.
 
-Done when every role has a command that ran from a fresh clone, is left out with its reason, or is listed as unverified.
+Done when every role has a command that ran from a fresh clone, is left out with its reason, or is listed as unverified, and Access names a login an agent ran alone.
 
 ## 4. Coding standards
 
@@ -73,7 +74,7 @@ Done when `.claude/settings.json` holds every template key and entry and every p
 
 ## 6. Cloud
 
-Copy [setup-script.sh](templates/cloud/setup-script.sh) and [session-start.sh](templates/cloud/session-start.sh) to `.sandbox/claude-cloud/`, and fill the placeholders from step 3's commands: the toolchain in the setup script, the fresh-clone steps and the services to restart in the hook. The setup script installs tools only; anything that reads the clone goes in the hook. Write what a cloud session does differently from a laptop in the hook's comments.
+Copy [setup-script.sh](templates/cloud/setup-script.sh) and [session-start.sh](templates/cloud/session-start.sh) to `.sandbox/claude-cloud/`, and fill the placeholders from step 3's commands: the toolchain in the setup script, through the project's `mise.toml` (write one pinning its Node and other tools when missing), the fresh-clone steps and the services to restart in the hook. The setup script installs tools only; anything that reads the clone goes in the hook. Write what a cloud session does differently from a laptop in the hook's comments.
 
 The environment is the user's to create on claude.ai/code. Hand them the setup script to paste and the extra network hosts it names.
 
@@ -94,5 +95,6 @@ Done when every line of the old file is in the new one or has its agreed home.
 - Changed: <files>
 - Feature map: <check summary line>
 - Commands: proven by <how>; unverified: <what, or none>
+- Access: <roles an agent logged in as, and any gap>
 - Left to you: <cloud steps>
 ```

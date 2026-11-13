@@ -22,7 +22,7 @@ The domain knowledge lives in skills: code written without them looks right and 
 
 **Implementer subagents** should be run in the background where possible for maximum concurrency, each in its own **lane**: a worktree, branch, test database and ports of its own (the project's `AGENTS.md` says how to isolate each), so parallel tickets never share state.
 
-Every agent picks what to test, and when, by **risk-based testing**. The full test suite runs once, in step 5.
+Every agent calls the Skill tool with `aysnc-skills:engineering`, and picks what to test, and when, by its risk-based testing. The full test suite runs once, in step 5.
 
 ## Steps
 

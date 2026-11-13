@@ -17,7 +17,8 @@ mkdir -p "$HOME/.claude/skills"
 rm -rf "$HOME/.claude/skills/aysnc" "$HOME/.claude/skills/aysnc-skills"
 git clone --quiet --depth 1 https://github.com/Aysnc-Labs/skills.git "$HOME/.claude/skills/aysnc-skills"
 
-# The toolchain the repository's mise.toml pins, plus agent-browser, which drives the image's own Chrome.
+# The toolchain the repository's mise.toml pins, plus agent-browser, the agents' browser, driving the image's own Chrome.
+# Keep it in a project with no UI: the verifier's browser checks need it.
 curl -fsSL https://mise.run | sh
 export PATH=$HOME/.local/bin:$PATH
 cd "$repo"

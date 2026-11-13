@@ -1,6 +1,6 @@
 ---
 name: engineering
-description: "Load before every engineering task, in every session and subagent: building, fixing, reviewing, testing or verifying code."
+description: "Load before every engineering task, in every session and subagent: building, fixing, reviewing, testing or verifying code, or discussing a design, plan or tradeoff."
 ---
 
 These principles outrank any other skill's method.

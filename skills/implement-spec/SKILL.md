@@ -30,7 +30,7 @@ Every agent picks what to test, and when, by **risk-based testing**. The full te
 
    Done when every answer is on the spec and the user has said go.
 
-2. Create the integration branch. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge, marked as closing the spec and tickets. Its body, not its comments, is where the AFK user catches up: record each `afk` call there the moment you make it.
+2. Create the integration branch in its own worktree: the main checkout is the user's, outside a cloud sandbox. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge, marked as closing the spec and tickets. Its body, not its comments, is where the AFK user catches up: record each `afk` call there the moment you make it.
 
 3. Brief each implementer with pointers: the ticket, the spec, its lane, the Reports of its merged blockers, any frontier sibling editing the same files, and the skills, AFK and testing paragraphs above. It reads its ticket, the body and every comment, loads its Skills to load, builds the ticket with `tdd`, updates `docs/feature-map.md` when it adds, removes, renames or moves a feature or changes a feature's purpose or entry point, merges the integration branch tip into its own branch before reporting done, and ends on a Report: Built, Tests, Decisions, Untested, Struggles, Research gaps.
 
@@ -46,7 +46,7 @@ Every agent picks what to test, and when, by **risk-based testing**. The full te
 
 6. If a draft PR exists, finish its body with the `pr` skill and leave it a draft. Otherwise, resolve each ticket the way the issue tracker closes work, and report the integration branch.
 
-7. Clean up every worktree, leaving the integration branch in the user's main checkout as a local branch, their HEAD untouched.
+7. Clean up every worktree, leaving the integration branch as a local branch and the main checkout as you found it.
 
    Done when `git worktree list` shows only the main checkout.
 

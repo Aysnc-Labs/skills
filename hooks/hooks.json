@@ -1,0 +1,26 @@
+{
+  "description": "Points every session and subagent at the aysnc-skills:aysnc skill, which holds Aysnc's working principles.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'The aysnc-skills:aysnc skill holds Aysnc'\\''s working principles for every task in this session. Load it with the Skill tool before the first task.'"
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"SubagentStart\",\"additionalContext\":\"The aysnc-skills:aysnc skill holds Aysnc'\\''s working principles for every task. Load it with the Skill tool before the first task.\"}}'"
+          }
+        ]
+      }
+    ]
+  }
+}

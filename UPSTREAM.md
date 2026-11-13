@@ -30,6 +30,9 @@ Left out: `ask-matt` (Matt's own), `setup-matt-pocock-skills` (replaced by `setu
 
 ## Ours
 
+- `aysnc`: the working principles for every task: simple, ergonomic, and learnings in the project, never the memory folder. `hooks/hooks.json` points every session (startup, clear, compact) and every subagent at it.
+- `look-online`: answers a question from the web in chat, each claim in a sources table marked reliable or **weak**. `research` is the background, file-writing version.
+- `clean-up`: inventories everything a chat created (worktrees, branches, databases, processes), confirms, removes it and returns to the starting state.
 - `setup`: writes the docs the other skills read, a feature map (`docs/feature-map.md`) guarded by `check-feature-map`, an `AGENTS.md` Commands section with each command proven once, moves `AGENTS.md` sections to their homes, and writes project Claude settings and the cloud scripts.
 - `afk`: the stance for any run the user is away from: decide as staff engineer and product owner, keep the work moving, and record every call for review. `implement` and `implement-spec` call it.
 - `prove-it`: brings the local stack up through the `AGENTS.md` Commands; a fresh `verifier` tests a PR on it in a real browser and tries to break it; an implementer subagent fixes what it proves with a red test; one `Verdict` comment. Depth is set by risk-based testing and the PR's Merge Danger. In a cloud session, fixes go on the session's branch with a PR into the PR branch.

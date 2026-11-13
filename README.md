@@ -66,7 +66,7 @@ Re-run it any time to repair drift.
 All skills use the `aysnc-skills:` prefix, for example `/aysnc-skills:tdd`.
 
 <details>
-<summary><b>Plan</b> · grill-with-docs, grilling, to-spec, to-tickets, wayfinder, triage, research, prototype</summary>
+<summary><b>Plan</b> · grill-with-docs, grilling, to-spec, to-tickets, wayfinder, triage, research, look-online, prototype</summary>
 
 | Skill | What it does |
 |---|---|
@@ -77,6 +77,7 @@ All skills use the `aysnc-skills:` prefix, for example `/aysnc-skills:tdd`.
 | `wayfinder` | Maps work too big for one session as decision tickets, resolved one at a time. |
 | `triage` | Moves issues and external PRs through triage and writes agent-ready briefs. |
 | `research` | Digs into primary sources and saves the findings in your repo. |
+| `look-online` | Answers a question from the web in chat, flagging every weak source. |
 | `prototype` | Builds a throwaway prototype to settle a design question. |
 
 </details>
@@ -127,11 +128,13 @@ All skills use the `aysnc-skills:` prefix, for example `/aysnc-skills:tdd`.
 </details>
 
 <details>
-<summary><b>Utilities</b> · setup, handoff, wizard, teach, writing-for-agents, pocock-this, in-your-own-words, wait-what</summary>
+<summary><b>Utilities</b> · aysnc, setup, clean-up, handoff, wizard, teach, writing-for-agents, pocock-this, in-your-own-words, wait-what</summary>
 
 | Skill | What it does |
 |---|---|
+| `aysnc` | Our working principles: simple, ergonomic, learnings in the project. A hook loads it in every session and subagent. |
 | `setup` | Gets a repository ready for everything above. |
+| `clean-up` | Removes everything a chat created (worktrees, branches, databases) after you confirm. |
 | `handoff` | Compacts the conversation into a doc another agent can pick up. |
 | `wizard` | Generates a bash wizard for the steps only a human can do. |
 | `teach` | Teaches you a new concept, right in your workspace. |

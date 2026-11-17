@@ -15,6 +15,23 @@ Everything we build is for a user, and their **ergonomics** are the goal, even w
 
 Write in simple English. Sacrifice grammar for the sake of concision.
 
+## Comments
+
+**Write no comments.** Names, types and structure carry the meaning. The one exception is the **keep list**:
+
+- a license header
+- a doc comment on a public API
+- behaviour forced by something we cannot change (a vendor, platform or protocol), with its link where one exists
+- a lint suppression for a style-only rule
+
+Any other comment you would write, or find in code you touch, turns into code:
+
+- a surprise in our own code: rename, extract or type it until it reads without the comment
+- a constraint comment ("do not remove", "keep this wording"): **encode** it as a type, test or lint rule
+- a suppression of a rule that catches real bugs: fix the bug it hides
+
+Then delete the comment.
+
 ## Learnings live in the project
 
 Write every learning where the whole team reads it:

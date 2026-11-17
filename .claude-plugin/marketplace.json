@@ -6,8 +6,8 @@
     {
       "name": "aysnc-skills",
       "source": "./",
-      "description": "Spec to tickets to an AFK implementation, a PR that says what needs you, and a verdict from an agent that did not write the code. Built on Matt Pocock's skills.",
-      "version": "1.4.0"
+      "description": "Aysnc Labs' workflow for Claude Code. It takes a feature\nfrom a design conversation to a tested pull request. Built on Matt Pocock's skills.",
+      "version": "1.5.0"
     }
   ]
 }

@@ -18,11 +18,11 @@ A lesson every project needs goes into the skills; only a project-only decision 
 
 **Breach:** a project doc holding a global lesson. A link to a skills PR does not clear it.
 
-## 4. No sediment, no cargo cult
+## 4. No comments, no sediment
 
-Agents copy what they see, so every comment and doc line earns its place on its own. Edit the current fact or delete it.
+Agents cargo-cult what they see, so code carries its own meaning and every doc line earns its place. Comments follow the keep list in the Comments section of `aysnc-skills:engineering`: call the Skill tool with it first if it isn't loaded. A kept comment, like a doc line, states the current fact: edit it or delete it.
 
-**Breach:** evidence, history, one-off steps, a copy of what code or a command shows, or a repeat; flag any bad example it copied too.
+**Breach:** a comment off the keep list that the diff adds or leaves standing in code it touches; in a kept comment or a doc line, evidence, history, one-off steps, a copy of what code or a command shows, or a repeat. Flag any bad example it copied too.
 
 ## 5. Runbooks are rare
 

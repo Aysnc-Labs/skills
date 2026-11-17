@@ -41,7 +41,6 @@ When you change a skill that came from upstream, add a row to the Changed table 
    - **patch**: a fix or rewording that doesn't change behaviour
    - **minor**: a new skill, or new behaviour in an existing one
    - **major**: a renamed or removed skill, or a change that needs projects to re-run `setup`
-3. Keep the skill tables in [README.md](README.md) current: add a new skill, remove a deleted one.
 
 CI runs the tests on every pull request.
 
